@@ -1,22 +1,24 @@
 #include <iostream>
-#include "EventNode.h"
+#include "AVLTreeNode.h"
 using namespace std;
 
-class EventAVLTree {
+// T is the value of node class
+template<class T>
+class AVLTree {
     public:
-        EventNode *root = NULL;
+        AVLTreeNode<T> *root = NULL;
         int n;
 
-        void insert(int x, int y) {
-            root = insertUtil(root, x, y);
+        void insert(T val) {
+            root = insertUtil(root, val);
         }
 
-        void remove(int x, int y) {
-            root = removeUtil(root, x, y);
+        void remove(T val) {
+            root = removeUtil(root, val);
         }
 
-        EventNode *search(int x, int y) {
-            return searchUtil(root, x, y);
+        AVLTreeNode<T> *search(T val) {
+            return searchUtil(root, val);
         }
 
         void inorder() {
@@ -25,30 +27,31 @@ class EventAVLTree {
         }
 
     protected:
-        int height(EventNode *node) {
+        int height(AVLTreeNode<T> *node) {
             if (node == NULL)
                 return 0;
             return node->height;
         }
 
+        // BAD IDEA! overload comparison operators instead
         // Compares the values of x and y with the current node
         // return 1 if new node is chronologically higher than current node
         // return 0 if new node has the same values as the current node
         // return -1 if new node is chronologically lower than current node
-        int compareEventNode(EventNode* node, int x, int y) {
-            if(node->y > y || (node->y == y && node->x < x)) {
-                // curr node is chronologically higher
-                return -1;
-            } else if(node->x == x && node->y == y) {
-                return 0;
-            } else {
-                // curr node is chronologically lower
-                return 1;
-            }
-        };
+        // int compareEventNode(T* node, int x, int y) {
+        //     if(node->y > y || (node->y == y && node->x < x)) {
+        //         // curr node is chronologically higher
+        //         return -1;
+        //     } else if(node->x == x && node->y == y) {
+        //         return 0;
+        //     } else {
+        //         // curr node is chronologically lower
+        //         return 1;
+        //     }
+        // };
 
-        EventNode *rightRotation(EventNode *node) {
-            EventNode *newNode = node->left;
+        AVLTreeNode<T> *rightRotation(AVLTreeNode<T> *node) {
+            AVLTreeNode<T> *newNode = node->left;
             node->left = newNode->right;
             newNode->right = node;
             node->height = 1 + max(height(node->left), height(node->right));
@@ -56,8 +59,8 @@ class EventAVLTree {
             return newNode;
         }
 
-        EventNode *leftRotation(EventNode *node) {
-            EventNode *newNode = node->right;
+        AVLTreeNode<T> *leftRotation(AVLTreeNode<T> *node) {
+            AVLTreeNode<T> *newNode = node->right;
             node->right = newNode->left;
             newNode->left = node;
             node->height = 1 + max(height(node->left), height(node->right));
@@ -65,41 +68,39 @@ class EventAVLTree {
             return newNode;
         }
 
-        void inorderUtil(EventNode *head) {
+        void inorderUtil(AVLTreeNode<T> *head, int level = 0) {
             if (head == NULL)
                 return;
-            inorderUtil(head->left);
-            cout << head->x << "," << head->y << " ";
-            inorderUtil(head->right);
+            inorderUtil(head->left, level + 1);
+            cout << head->val << " level = " << level << " \n";
+            inorderUtil(head->right, level + 1);
         }
 
-        EventNode *insertUtil(EventNode *root, int x, int y) {
+        AVLTreeNode<T> *insertUtil(AVLTreeNode<T> *root, T val) {
             if (root == NULL) {
                 n += 1;
-                EventNode *temp = new EventNode(x, y);
+                AVLTreeNode<T> *temp = new AVLTreeNode<T>(val);
                 return temp;
             }
 
-            int res = compareEventNode(root, x, y);
-
-            if (res == -1)
-                root->left = insertUtil(root->left, x, y);
-            else if (res == 1)
-                root->right = insertUtil(root->right, x, y);
+            if (root->val > val)
+                root->left = insertUtil(root->left, val);
+            else if (root-> val < val)
+                root->right = insertUtil(root->right, val);
 
             root->height = 1 + max(height(root->left), height(root->right));
 
             // balance heights
             int bal = height(root->left) - height(root->right);
             if (bal > 1) {
-                if (compareEventNode(root->left, x, y) == -1) {
+                if (root->left->val > val) {
                     return rightRotation(root);
                 } else {
                     root->left = leftRotation(root->left);
                     return rightRotation(root);
                 }
             } else if (bal < -1) {
-                if (compareEventNode(root->right, x, y) == 1) {
+                if (root->right->val < val) {
                     return leftRotation(root);
                 } else {
                     root->right = rightRotation(root->right);
@@ -110,21 +111,19 @@ class EventAVLTree {
             return root;
         }
 
-        EventNode *removeUtil(EventNode *node, int x, int y) {
+        AVLTreeNode<T> *removeUtil(AVLTreeNode<T> *node, T val) {
             if (node == NULL)
                 return NULL;
 
-            int res = compareEventNode(node, x, y);
-
-            if (res == -1) {
-                node->left = removeUtil(node->left, x, y);
-            } else if (res == 1) {
-                node->right = removeUtil(node->right, x, y);
+            if (node->val > val) {
+                node->left = removeUtil(node->left, val);
+            } else if (node->val < val) {
+                node->right = removeUtil(node->right, val);
             } else {
                 // delete the current node
-                EventNode *r = node->right;
+                AVLTreeNode<T> *r = node->right;
                 if (node->right == NULL) {
-                    EventNode *l = node->left;
+                    AVLTreeNode<T> *l = node->left;
                     delete (node);
                     node = l;
                 } else if (node->left == NULL) {
@@ -134,10 +133,9 @@ class EventAVLTree {
                     while (r->left != NULL)
                         r = r->left;
 
-                    node->x = r->x;
-                    node->y = r->y;
+                    node->val = r->val;
 
-                    node->right = removeUtil(node->right, r->x, r->y);
+                    node->right = removeUtil(node->right, r->val);
                 }
             }
             
@@ -166,15 +164,28 @@ class EventAVLTree {
             return node;
         }
 
-        EventNode *searchUtil(EventNode *head, int x, int y) {
+        AVLTreeNode<T> *searchUtil(AVLTreeNode<T> *head, T val) {
             if (head == NULL)
                 return NULL;
-            int res = compareEventNode(head, x, y);
-            if (res == 0)
+            if (head->val == val)
                 return head;
-            if (res == -1)
-                return searchUtil(head->left, x, y);
-            if (res == 1)
-                return searchUtil(head->right, x, y);
+            if (head->val > val)
+                return searchUtil(head->left, val);
+            if (head->val < val)
+                return searchUtil(head->right, val);
         }
 };
+
+// int main() {
+//     AVLTree<int>* root = new AVLTree<int>();
+//     root->insert(5);
+//     root->insert(1);
+//     root->insert(2);
+//     root->insert(3);
+//     root->insert(3);
+//     root->insert(4);
+//     root->inorder();
+//     root->remove(5);
+//     root->inorder();
+//     return 0;
+// }

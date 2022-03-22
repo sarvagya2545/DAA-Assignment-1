@@ -3,26 +3,22 @@
 using namespace std;
 
 // This is the node of the events
-class EventNode {
+template<class T>
+class AVLTreeNode {
     public:
-    int x;
-    int y;
+    T val;
     int height; // height because AVL tree used
-    EventNode* left;
-    EventNode* right;
+    AVLTreeNode* left;
+    AVLTreeNode* right;
 
-    EventNode() {
-        this->x = 0;
-        this->y = 0;
+    AVLTreeNode<T>() {
         this->left = NULL;
         this->right = NULL;
         this->height = 1;
     }
 
-    EventNode(int _x, int _y) {
-        // initialize a new event with x & y coordinates
-        this->x = _x;
-        this->y = _y;
+    AVLTreeNode<T>(T _val) {
+        this->val = _val;
         this->left = NULL;
         this->right = NULL;
         this->height = 1;

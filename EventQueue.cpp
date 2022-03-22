@@ -4,20 +4,25 @@
 #include "EventNodeAVLTree.h"
 using namespace std;
 
-// Done: AVL tree implementation
-// TODO implement other methods
-class EventQueue: public EventAVLTree {
+class EventQueue {
     public:
-    EventNode* root;
+    EventAVLTree* tree;
 
     EventQueue() {
-        this->root = NULL;
+        this->tree = new EventAVLTree();
     }
 
     EventQueue(int _x, int _y) {
         // Initialise with the first EventPoint in the queue
-        this->root = new EventNode(_x, _y);
+        this->tree = new EventAVLTree();
+        this->tree->insert(_x, _y);
     }
 
     
 };
+
+int main() {
+    EventQueue* eq = new EventQueue();
+    
+    return 0;
+}
