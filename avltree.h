@@ -33,23 +33,6 @@ class AVLTree {
             return node->height;
         }
 
-        // BAD IDEA! overload comparison operators instead
-        // Compares the values of x and y with the current node
-        // return 1 if new node is chronologically higher than current node
-        // return 0 if new node has the same values as the current node
-        // return -1 if new node is chronologically lower than current node
-        // int compareEventNode(T* node, int x, int y) {
-        //     if(node->y > y || (node->y == y && node->x < x)) {
-        //         // curr node is chronologically higher
-        //         return -1;
-        //     } else if(node->x == x && node->y == y) {
-        //         return 0;
-        //     } else {
-        //         // curr node is chronologically lower
-        //         return 1;
-        //     }
-        // };
-
         AVLTreeNode<T> *rightRotation(AVLTreeNode<T> *node) {
             AVLTreeNode<T> *newNode = node->left;
             node->left = newNode->right;
