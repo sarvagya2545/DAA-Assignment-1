@@ -1,6 +1,3 @@
-#include <bits/stdc++.h>
-using namespace std;
-
 // depicts relationship between a point and segment
 // 0 = upper endpoint of segment
 // 1 = lower endpoint of segment

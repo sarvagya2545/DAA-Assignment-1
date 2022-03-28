@@ -1,5 +1,6 @@
-#include <bits/stdc++.h>
+#include <iostream>
 #include "utils.h"
+#include "Slope.h"
 using namespace std;
 
 class Point {
@@ -21,6 +22,8 @@ class Point {
 class Segment {
     public:
     Point st, en; // start and end points of the segment
+    Slope slope;
+    static long double sweeplineY; // Y coordinate for the sweep line
 
     Segment(Point p1, Point p2) {
         if(p1.y > p2.y || (p1.y == p2.y && p1.x < p2.x)) {
@@ -30,6 +33,8 @@ class Segment {
             this->st = p2;
             this->en = p1;
         }
+
+        this->slope.define(p1.x, p1.y, p2.x, p2.y);
     }
 
     Segment(float x1, float y1, float x2, float y2) {
@@ -51,6 +56,7 @@ class Segment {
         (this->st).y = hi_y;
         (this->en).x = lo_x;
         (this->en).y = lo_y;
+        this->slope.define(x1,y1,x2,y2);
     }
 
     // x coordinate value at a particular y value
@@ -72,7 +78,38 @@ class Segment {
 
     }
 
-    bool operator < (const Segment& s) {
-        
+    bool operator < (Segment& s) {
+        float this_x = this->x(sweeplineY);
+        float next_x = s.x(sweeplineY);
+
+        if(this_x == next_x) {
+            return this->slope < s.slope;
+        }
+
+        return this_x < next_x;
+    }
+
+    bool operator > (Segment& s) {
+        float this_x = this->x(sweeplineY);
+        float next_x = s.x(sweeplineY);
+
+        if(this_x == next_x) {
+            return this->slope > s.slope;
+        }
+
+        return this_x > next_x;
     }
 };
+
+// long double Segment::sweeplineY = 3.0;
+
+// int main() {
+//     Segment s1(0,1,4,5), s2(0,5,4,1);
+//     cout << "Slope of s1 is " << s1.slope.m << " and of s2 is " << s2.slope.m << "\n";
+
+//     if(s1 < s2) {
+//         cout << "S1 is lower";
+//     } else if(s1 > s2) {
+//         cout << "S2 is lower";
+//     }
+// }

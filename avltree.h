@@ -7,7 +7,6 @@ template<class T>
 class AVLTree {
     public:
         AVLTreeNode<T> *root = NULL;
-        int n;
 
         void insert(T val) {
             root = insertUtil(root, val);
@@ -24,6 +23,26 @@ class AVLTree {
         void inorder() {
             inorderUtil(root);
             cout << endl;
+        }
+
+        AVLTreeNode<T>* maxNode() {
+            AVLTreeNode<T>* node = root;
+
+            while(node->right != NULL) {
+                node = node->right;
+            }
+
+            return node;
+        }
+
+        AVLTreeNode<T>* minNode() {
+            AVLTreeNode<T>* node = root;
+
+            while(node->left != NULL) {
+                node = node->left;
+            }
+
+            return node;
         }
 
     protected:
@@ -61,7 +80,6 @@ class AVLTree {
 
         AVLTreeNode<T> *insertUtil(AVLTreeNode<T> *root, T val) {
             if (root == NULL) {
-                n += 1;
                 AVLTreeNode<T> *temp = new AVLTreeNode<T>(val);
                 return temp;
             }
@@ -158,17 +176,3 @@ class AVLTree {
                 return searchUtil(head->right, val);
         }
 };
-
-// int main() {
-//     AVLTree<int>* root = new AVLTree<int>();
-//     root->insert(5);
-//     root->insert(1);
-//     root->insert(2);
-//     root->insert(3);
-//     root->insert(3);
-//     root->insert(4);
-//     root->inorder();
-//     root->remove(5);
-//     root->inorder();
-//     return 0;
-// }
