@@ -4,5 +4,5 @@
 // 2 = lies on segment
 // -1 does not lie on segment
 enum point_seg_rel {
-    none = -1, upper = 0, lower = 1, on = 2
+    none = -1, U = 0, L = 1, C = 2
 };

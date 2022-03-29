@@ -4,18 +4,20 @@
 #include<Segment.h>
 using namespace std;
 
-// Done: AVL tree implementation
-// TODO: implement methods
 class LineStatus {
     public:
-    AVLTree<Segment>* status;
+    AVLTree<Segment> status;
     float y; // current y
 
     LineStatus() {
-
+        
     }
 
     void insert(Segment s) {
-        
+
+    }
+
+    void remove(Segment s) {
+
     }
 };

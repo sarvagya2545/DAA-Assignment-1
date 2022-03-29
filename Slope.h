@@ -1,40 +1,40 @@
 #include <iostream>
 using namespace std;
 
-enum slope_t { undefined, rational, inf };
+enum slope_t { undefined, rational , inf };
 
 class Slope {
     public:
-    slope_t type;
+    slope_t t; // type of slope
     double m;
     Slope() {
-        type = undefined;
+        slope_t t = undefined;
     };
 
     Slope(float x0, float y0, float x1, float y1) {
-        type = undefined;
+        t = undefined;
         define(x0,y0,x1,y1);
     };
 
     void define(float x0, float y0, float x1, float y1) {
-        if(type == undefined) {
+        if(t == undefined) {
             if(x0 == x1) {
-                type = inf;
+                t = inf;
             } else {
-                type = rational;
+                t = rational;
                 m = (y1 - y0) / (x1 - x0);
             }
         } else {
-            cout << "Slope already has been defined for this instance";
+            cout << "Slope already has been defined for this instance. The slope is: " << this->m;
         }
     };
 
     bool operator > (const Slope& s) {
-        if(this->type == inf) {
-            return s.type != inf && s.m > 0;
+        if(this->t == inf) {
+            return s.t != inf && s.m > 0;
         }
 
-        if(s.type == inf) {
+        if(s.t == inf) {
             return this->m < 0;
         }
 
@@ -49,11 +49,11 @@ class Slope {
     }
 
     bool operator < (const Slope& s) {
-        if(this->type == inf) {
-            return s.type != inf && s.m < 0;
+        if(this->t == inf) {
+            return s.t != inf && s.m < 0;
         }
 
-        if(s.type == inf) {
+        if(s.t == inf) {
             return this->m > 0;
         }
 

@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
-#include "Segment.h"
-#include "utils.h"
+// #include "Segment.h"
+
 using namespace std;
 
 class Event {
@@ -8,11 +8,21 @@ class Event {
     float x;
     float y;
     // Segment s;
-    vector<pair<Segment, int>> segments;
+    vector<vector<Segment>> segments = vector<vector<Segment>> (3, vector<Segment>(0)); // index 0 = U, 1 = L, 2 = C 
 
     Event(float _x, float _y) {
         this->x = _x;
         this->y = _y;
+    }
+
+    Event(float _x, float _y, Segment s, point_seg_rel t) {
+        this->x = _x;
+        this->y = _y;
+        this->segments[t].push_back(s);
+    }
+
+    void insertSegment(Segment s, point_seg_rel t) {
+        segments[t].push_back(s);
     }
 
     bool operator <(const Event& e) {
@@ -26,17 +36,18 @@ class Event {
     bool operator ==(const Event& e) {
         return this->y == e.y && this->x == e.x;
     }
-};
 
-int main() {
-    Event *e1 = new Event(1,1);
-    Event *e2 = new Event(1,1);
-
-    if(*e1 > *e2) {
-        cout << "e1 > e2";
-    } else if(*e2 > *e1) {
-        cout << "e2 > e1";
-    } else {
-        cout << "e2 == e1";
+    friend ostream &operator<<(ostream &output, const Event &E) { 
+        output << "Point : (" << E.x << ", " << E.y << ")\n";
+        for(int i = 0; i < E.segments[U].size(); i++) {
+            output << "Segment U " << i << ": " << E.segments[U][i] << "\n";
+        }
+        for(int i = 0; i < E.segments[L].size(); i++) {
+            output << "Segment L " << i << ": " << E.segments[L][i] << "\n";
+        }
+        for(int i = 0; i < E.segments[C].size(); i++) {
+            output << "Segment C " << i << ": " << E.segments[C][i] << "\n";
+        }
+        return output;
     }
-}
+};

@@ -22,7 +22,6 @@ class AVLTree {
 
         void inorder() {
             inorderUtil(root);
-            cout << endl;
         }
 
         AVLTreeNode<T>* maxNode() {
@@ -74,7 +73,7 @@ class AVLTree {
             if (head == NULL)
                 return;
             inorderUtil(head->left, level + 1);
-            cout << head->val << " level = " << level << " \n";
+            cout << "Node value: " << head->val << " level = " << level << " \n";
             inorderUtil(head->right, level + 1);
         }
 

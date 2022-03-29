@@ -8,8 +8,8 @@ class AVLTreeNode {
     public:
     T val;
     int height; // height because AVL tree used
-    AVLTreeNode* left;
-    AVLTreeNode* right;
+    AVLTreeNode<T>* left;
+    AVLTreeNode<T>* right;
 
     AVLTreeNode<T>() {
         this->left = NULL;
@@ -17,8 +17,8 @@ class AVLTreeNode {
         this->height = 1;
     }
 
-    AVLTreeNode<T>(T _val) {
-        this->val = _val;
+    AVLTreeNode<T>(T _val): val(_val) {
+        // this->val = _val;
         this->left = NULL;
         this->right = NULL;
         this->height = 1;
