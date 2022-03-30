@@ -38,7 +38,7 @@ class Event {
     }
 
     friend ostream &operator<<(ostream &output, const Event &E) { 
-        output << "Point : (" << E.x << ", " << E.y << ")\n";
+        output << "Event:\nPoint : (" << E.x << ", " << E.y << ")\n";
         for(int i = 0; i < E.segments[U].size(); i++) {
             output << "Segment U " << i << ": " << E.segments[U][i] << "\n";
         }
