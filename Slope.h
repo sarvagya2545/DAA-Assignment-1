@@ -5,8 +5,8 @@ enum slope_t { undefined, rational , inf };
 
 class Slope {
     public:
-    slope_t t; // type of slope
-    double m;
+    slope_t t = undefined; // type of slope
+    double m = INT_MAX;
     Slope() {
         slope_t t = undefined;
     };
