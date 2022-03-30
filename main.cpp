@@ -15,13 +15,9 @@ vector<pair<Point, vector<vector<Segment>>>> intersections;
 void printIntersections(vector<pair<Point, vector<vector<Segment>>>> intersections) {
     cout << "\nPrinting intersections:\n";
     cout << "\n*** *** *** *** *** *** *** *** *** *** ***\n";
-    cout << "\n*** *** *** *** *** *** *** *** *** *** ***\n";
-    cout << "\n*** *** *** *** *** *** *** *** *** *** ***\n";
     for(int i = 0; i < intersections.size(); i++) {
         cout << intersections[i].first << "\n";
     }
-    cout << "\n*** *** *** *** *** *** *** *** *** *** ***\n";
-    cout << "\n*** *** *** *** *** *** *** *** *** *** ***\n";
     cout << "\n*** *** *** *** *** *** *** *** *** *** ***\n";
 }
 
@@ -36,7 +32,6 @@ EventQueue initEventQueue(vector<Segment> segmentList) {
     return event_queue;
 }
 
-// Todo: horizontal & vertical lines edge cases
 pair<bool, pair<float, float>> intersect(Point p1, Point p2, Point p3, Point p4){
 	float a1 = p2.y - p1.y;
 	float b1 = p1.x - p2.x;
@@ -73,12 +68,14 @@ void findNewEvent(Segment s_l, Segment s_r, Point p) {
     pair<bool, pair<float, float>> ans = intersect(s_l.st, s_l.en, s_r.st, s_r.en);
     bool hasIntersection = ans.first;
     pair<float, float> coor = ans.second;
-    if(hasIntersection && coor.second <= p.y) {
+    if(hasIntersection && (coor.second < p.y || (coor.second == p.y && coor.first > p.x))) {
         Point intersection_point(coor.first, coor.second);
         cout << "\nintersection_point\t" << intersection_point;
         cout << "\nSegments\t" << s_l << "\t" << s_r << "\n";
-        // event_queue.insert(intersection_point, s_l);
-        // event_queue.insert(intersection_point, s_r);
+        event_queue.insert(intersection_point, s_l);
+        cout << "\nInserted in queue A\n";
+        event_queue.insert(intersection_point, s_r);
+        cout << "\nInserted in queue B\n";
     }
 }
 
@@ -204,9 +201,9 @@ void handleEventPoint(Event e) {
 }
 
 void findIntersections(EventQueue event_q) {
-    // cout << "Inside findIntersections...\n";
+    cout << "Inside findIntersections...\n";
     while(!event_q.empty()) {
-        // cout << "Event handle...\n";
+        cout << "Event handle...\n";
         Event nextEvent = event_q.next();
         handleEventPoint(nextEvent);
     }
