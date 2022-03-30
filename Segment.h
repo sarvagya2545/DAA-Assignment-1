@@ -86,8 +86,18 @@ class Segment {
         return this_x > next_x;
     }
 
+    bool operator == (Segment& s) {
+        return this->st == s.st && this->en == s.en; 
+    }
+
     friend ostream &operator<<(ostream &output, const Segment &S) { 
         output << "endpoints: (" << S.st.x << ", " << S.st.y << ")," << "(" << S.en.x << ", " << S.en.y << ")";
         return output;
     }
 };
+
+long double Segment::sweeplineY = 0.0;
+
+void changeY(long double Y) {
+    Segment::sweeplineY = Y;
+}

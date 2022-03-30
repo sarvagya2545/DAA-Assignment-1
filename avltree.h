@@ -24,8 +24,8 @@ class AVLTree {
             inorderUtil(root);
         }
 
-        AVLTreeNode<T>* maxNode() {
-            AVLTreeNode<T>* node = root;
+        AVLTreeNode<T>* maxNode(AVLTreeNode<T>* node = NULL) {
+            if(!node) node = this->root;
 
             while(node->right != NULL) {
                 node = node->right;
@@ -34,14 +34,29 @@ class AVLTree {
             return node;
         }
 
-        AVLTreeNode<T>* minNode() {
-            AVLTreeNode<T>* node = root;
+        AVLTreeNode<T>* minNode(AVLTreeNode<T>* node = NULL) {
+            if(!node) node = this->root;
 
             while(node->left != NULL) {
                 node = node->left;
             }
 
             return node;
+        }
+
+        AVLTreeNode<T>* leftNeighbour(T _val) {
+            return leftNeighbourUtil(root, _val);
+        }
+
+        AVLTreeNode<T>* rightNeighbour(T _val) {
+            return rightNeighbourUtil(root, _val);
+        }
+
+        vector<AVLTreeNode<T>* > neighbours(T _val) {
+            vector<AVLTreeNode<T>*> n;
+            n.push_back(leftNeighbourUtil(root, _val));
+            n.push_back(rightNeighbourUtil(root, _val));
+            return n;
         }
 
     protected:
@@ -173,5 +188,46 @@ class AVLTree {
                 return searchUtil(head->left, val);
             if (head->val < val)
                 return searchUtil(head->right, val);
+        }
+
+        AVLTreeNode<T> *leftNeighbourUtil(AVLTreeNode<T> *node, T _val, AVLTreeNode<T> *pre = NULL) {
+            if(node == NULL)
+                return NULL;
+
+            if(node->val == _val) {
+                // if node has left sub tree, the max node of it is the left neighbour
+                if(node->left != NULL) {
+                    return maxNode(node->left);
+                }
+                // else return the predecessor
+                return pre;
+            } else if(node->val > _val) {
+                return leftNeighbourUtil(node->left, _val, pre);
+            } else if(node->val < _val) {
+                // possible value for predecessor
+                pre = node;
+                return leftNeighbourUtil(node->right, _val, pre);
+            }
+        }
+
+
+        AVLTreeNode<T> *rightNeighbourUtil(AVLTreeNode<T> *node, T _val, AVLTreeNode<T> *suc = NULL) {
+            if(node == NULL)
+                return NULL;
+
+            if(node->val == _val) {
+                // if node has right sub tree, the min node of it is the right neighbour
+                if(node->right != NULL) {
+                    return minNode(node->right);
+                }
+                // else return the successor
+                return suc;
+            } else if(node->val > _val) {
+                // possible value for successor
+                suc = node;
+                return rightNeighbourUtil(node->left, _val, suc);
+            } else if(node->val < _val) {
+                return rightNeighbourUtil(node->right, _val, suc);
+            }
         }
 };

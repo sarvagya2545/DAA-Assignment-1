@@ -13,6 +13,10 @@ class Point {
         this->y = _y;
     }
 
+    bool operator == (Point& p) {
+        return this->x == p.x && this->y == p.y;
+    }
+
     friend ostream &operator<<(ostream &output, const Point &P) {
         output << "Point: (" << P.x << ", " << P.y << ")";
         return output;

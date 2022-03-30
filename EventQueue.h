@@ -1,8 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<algorithm>
-#include "AVLTree.h"
-#include "Event.h"
 using namespace std;
 
 class EventQueue {
@@ -12,12 +10,21 @@ class EventQueue {
         
     }
 
-    Event next() {
-        // returns next event
+    bool empty() {
+        return event_q.root == NULL;
     }
 
-    void remove() {
+    Event next() {
+        // returns next event & removes it from the event queue
+        AVLTreeNode<Event>* node = event_q.minNode();
 
+        Event e = node->val;
+        remove(e);
+        return e;
+    }
+
+    void remove(Event e) {
+        event_q.remove(e);
     }
 
     void insert(Point p, Segment s) {

@@ -12,7 +12,7 @@ class Slope {
     };
 
     Slope(float x0, float y0, float x1, float y1) {
-        t = undefined;
+        slope_t t = undefined;
         define(x0,y0,x1,y1);
     };
 

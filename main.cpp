@@ -1,8 +1,14 @@
 #include <vector>
 #include <iostream>
 #include "utils.h"
+#include "AVLTree.h"
 #include "Segment.h"
+#include "Event.h"
 #include "EventQueue.h"
+#include "LineStatus.h"
+
+LineStatus status_queue;
+vector<pair<Point, vector<vector<Segment>>>> intersections;
 
 EventQueue initEventQueue(vector<Segment> segmentList) {
     EventQueue event_queue;
@@ -15,22 +21,80 @@ EventQueue initEventQueue(vector<Segment> segmentList) {
     return event_queue;
 }
 
+vector<Segment> unionOf(vector<Segment> lineSet1, vector<Segment> lineSet2) {
+    vector<Segment> unionSet(lineSet1);
+
+    for(int i = 0; i < lineSet2.size(); i++) {
+        bool unique = true;
+        for(int j = 0; j < lineSet1.size(); j++) {
+            if(lineSet1[j] == lineSet2[i]) {
+                unique = false;
+                break;
+            }
+        }
+
+        if(unique) {
+            unionSet.push_back(lineSet2[i]);
+        }
+    }
+
+    return unionSet;
+}
+
+void handleEventPoint(Event e) {
+    // no. of segments interacting with the event point
+    int segment_count = e.segments[L].size() + e.segments[U].size() + e.segments[C].size();
+
+    if(segment_count > 1) {
+        Point p(e.x, e.y);
+        intersections.push_back(make_pair(p, e.segments));
+    }
+
+    // Delete L(p) U C(p) from status structure
+    vector<Segment> LCset = unionOf(e.segments[L], e.segments[C]);
+    vector<Segment> UCset = unionOf(e.segments[U], e.segments[C]);
+
+    float delta = 0.0001;
+    // Segment::sweeplineY = e.y + delta;
+    changeY(e.y + delta);
+
+    for(int i = 0; i < LCset.size(); i++) {
+        // delete the segment
+        status_queue.remove(LCset[i]);
+    }
+
+    // Segment::sweeplineY = e.y - delta;
+    changeY(e.y - delta);
+
+    for(int i = 0; i < UCset.size(); i++) {
+        // insert the segment
+        status_queue.insert(UCset[i]);
+    }
+
+    // cout << "Printing...\n";
+    // status_queue.print();
+
+    // cout << "Printing intersections...\n" << intersections.size();
+
+    if(UCset.size() == 0) {
+        // TODO: 1. find left and right neighbours
+        //       2. find new event points
+        
+    } else {
+
+    }
+}
+
 void findIntersections(EventQueue event_q) {
-    
+    cout << "Inside findIntersections...\n";
+    while(!event_q.empty()) {
+        cout << "Event handle...\n";
+        Event nextEvent = event_q.next();
+        handleEventPoint(nextEvent);
+    }
 }
 
 int main() {
-    /*
-        Find intersections:
-            Input. A set S of line segments in the plane.
-            Output. The set of intersection points among the segments in S, with for each intersection point the segments that contain it.
-        1. Initialize an empty event queue Q. Next, insert the segment endpoints into Q; when an upper endpoint is inserted, the corresponding segment should be stored with it.
-        2. Initialize an empty status structure T.
-        3. while Q is not empty
-        4.      do Determine the next event point p in Q and delete it.
-        5.      HANDLEEVENTPOINT(p)
-    */
-
     cout << "Input the number of segments: ";
     int n;
     cin >> n;
@@ -43,6 +107,7 @@ int main() {
     }
 
     EventQueue ev = initEventQueue(segmentList);
-    // ev.print();
+    ev.print();
+    cout << "Find intersections...\n";
     findIntersections(ev);
 }
