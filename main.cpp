@@ -12,6 +12,8 @@ LineStatus status_queue;
 EventQueue event_queue;
 vector<pair<Point, vector<vector<Segment>>>> intersections;
 
+/// @brief Function to print Intersections
+/// @param intersections A vector containing a pair of a point and a segment list containing segments passing through it
 void printIntersections(vector<pair<Point, vector<vector<Segment>>>> intersections) {
     cout << "\nPrinting intersections:\n";
     cout << "\n*** *** *** *** *** *** *** *** *** *** ***\n";
@@ -21,6 +23,9 @@ void printIntersections(vector<pair<Point, vector<vector<Segment>>>> intersectio
     cout << "\n*** *** *** *** *** *** *** *** *** *** ***\n";
 }
 
+/// @brief Function to initialise event queue with the segment endpoints
+/// @param segmentList a list of segments
+/// @returns An initialised EventQueue object with segment endpoints
 EventQueue initEventQueue(vector<Segment> segmentList) {
     EventQueue event_queue;
 
@@ -32,6 +37,12 @@ EventQueue initEventQueue(vector<Segment> segmentList) {
     return event_queue;
 }
 
+/// @brief Function to find the intersection between 2 segments given their points
+/// @param p1 Point 1 of Segment 1
+/// @param p2 Point 2 of Segment 2
+/// @param p3 Point 1 of Segment 1
+/// @param p4 Point 2 of Segment 2
+/// @returns a pair of a boolean and pair<float, float> to represent whether the segments intersect or not & the coordinates of the intersection point
 pair<bool, pair<float, float>> intersect(Point p1, Point p2, Point p3, Point p4){
 	float a1 = p2.y - p1.y;
 	float b1 = p1.x - p2.x;
@@ -64,6 +75,10 @@ pair<bool, pair<float, float>> intersect(Point p1, Point p2, Point p3, Point p4)
     }
 }
 
+/// @brief Function to find a new event as an intersection of 2 neighbouring segments
+/// @param s_l Left Segment
+/// @param s_r Right Segment
+/// @param p Point p
 void findNewEvent(Segment s_l, Segment s_r, Point p) {
     pair<bool, pair<float, float>> ans = intersect(s_l.st, s_l.en, s_r.st, s_r.en);
     bool hasIntersection = ans.first;
@@ -73,44 +88,63 @@ void findNewEvent(Segment s_l, Segment s_r, Point p) {
         cout << "\nintersection_point\t" << intersection_point;
         cout << "\nSegments\t" << s_l << "\t" << s_r << "\n";
         event_queue.insert(intersection_point, s_l);
-        cout << "\nInserted in queue A\n";
         event_queue.insert(intersection_point, s_r);
-        cout << "\nInserted in queue B\n";
     }
 }
 
-Segment findLeftMostSeg(vector<Segment> lineSet) {
+/// @brief Function to find the left most segment in a line vector
+/// @param lineSet a vector<Segment> to represent a set of lines
+/// @returns pair<bool, Segment> a pair of a boolean and a Segment: to represent whether a leftmost segment exists or not & the Segment itself
+pair<bool,Segment> findLeftMostSeg(vector<Segment> lineSet) {
     // left most segment is the segment with min x coordinate for a particular y
-    float min_x = lineSet[0].x(Segment::sweeplineY);
-    Segment mn = lineSet[0];
+    // float min_x = lineSet[0].x(Segment::sweeplineY);
+    float min_x = FLT_MAX;
+    // Segment mn = lineSet[0];
+    int mn = -1;
 
     for(int i = 0; i < lineSet.size(); i++) {
         float x = lineSet[i].x(Segment::sweeplineY);
         if(x < min_x) {
             min_x = x;
-            mn = lineSet[i];
+            mn = i;
         }
     }
+    if(mn == -1) {
+        return make_pair(false, lineSet[0]);
+    }
 
-    return mn;
+    return make_pair(true, lineSet[mn]);
 }
 
-Segment findRightMostSeg(vector<Segment> lineSet) {
+/// @brief Function to find the right most segment in a line vector
+/// @param lineSet a vector<Segment> to represent a set of lines
+/// @returns pair<bool, Segment> a pair of a boolean and a Segment: to represent whether a rightmost segment exists or not & the Segment itself
+pair<bool,Segment> findRightMostSeg(vector<Segment> lineSet) {
     // right most segment is the segment with max x coordinate for a particular y
-    float max_x = lineSet[0].x(Segment::sweeplineY);
-    Segment mx = lineSet[0];
+    // float max_x = lineSet[0].x(Segment::sweeplineY);
+    float max_x = FLT_MIN;
+    // Segment mx = lineSet[0];
+    int mx = -1;
 
     for(int i = 0; i < lineSet.size(); i++) {
         float x = lineSet[i].x(Segment::sweeplineY);
         if(x > max_x) {
             max_x = x;
-            mx = lineSet[i];
+            mx = i;
         }
     }
 
-    return mx;
+    if(mx == -1) {
+        return make_pair(false, lineSet[0]);
+    }
+
+    return make_pair(true, lineSet[mx]);
 }
 
+/// @brief Function to find the union of 2 line sets (represented as vectors)
+/// @param lineSet1 a set of line segments
+/// @param lineSet2 a set of line segments
+/// @returns a vector of Segments, the union of the 2 sets
 vector<Segment> unionOf(vector<Segment> lineSet1, vector<Segment> lineSet2) {
     vector<Segment> unionSet(lineSet1);
 
@@ -131,6 +165,8 @@ vector<Segment> unionOf(vector<Segment> lineSet1, vector<Segment> lineSet2) {
     return unionSet;
 }
 
+/// @brief Function to handle an event point
+/// @param e The event point which needs to be handled
 void handleEventPoint(Event e) {
     // no. of segments interacting with the event point
     int segment_count = e.segments[L].size() + e.segments[U].size() + e.segments[C].size();
@@ -181,25 +217,32 @@ void handleEventPoint(Event e) {
         }
 
     } else {
-
-        Segment leftMostSeg = findLeftMostSeg(UCset);
-        pair<bool,Segment> p_l = status_queue.leftNeighbour(leftMostSeg);
-        Segment s_l = p_l.second;
-        if(p_l.first) {
-            // cout << "S_l" << s_l;
-            findNewEvent(s_l, leftMostSeg, p);
+        pair<bool,Segment> leftMost = findLeftMostSeg(UCset);
+        Segment leftMostSeg = leftMost.second;
+        if(leftMost.first) {
+            pair<bool,Segment> p_l = status_queue.leftNeighbour(leftMostSeg);
+            Segment s_l = p_l.second;
+            if(p_l.first) {
+                // cout << "S_l" << s_l;
+                findNewEvent(s_l, leftMostSeg, p);
+            }
         }
 
-        Segment rightMostSeg = findRightMostSeg(UCset);
-        pair<bool,Segment> p_r = status_queue.rightNeighbour(rightMostSeg);
-        Segment s_r = p_r.second;
-        if(p_r.first) {
-            // cout << "S_r" << s_r;
-            findNewEvent(s_r, rightMostSeg, p);
+        pair<bool,Segment> rightMost = findRightMostSeg(UCset);
+        Segment rightMostSeg = rightMost.second;
+        if(rightMost.first) {
+            pair<bool,Segment> p_r = status_queue.rightNeighbour(rightMostSeg);
+            Segment s_r = p_r.second;
+            if(p_r.first) {
+                // cout << "S_r" << s_r;
+                findNewEvent(s_r, rightMostSeg, p);
+            }
         }
     }
 }
 
+/// @brief Function to find intersections
+/// @param event_q The event queue containing all the endpoints of all the segments
 void findIntersections(EventQueue event_q) {
     cout << "Inside findIntersections...\n";
     while(!event_q.empty()) {
