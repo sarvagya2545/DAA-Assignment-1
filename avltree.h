@@ -44,11 +44,11 @@ class AVLTree {
             return node;
         }
 
-        AVLTreeNode<T>* leftNeighbour(T _val) {
+        AVLTreeNode<T>* leftNeighbourAVL(T _val) {
             return leftNeighbourUtil(root, _val);
         }
 
-        AVLTreeNode<T>* rightNeighbour(T _val) {
+        AVLTreeNode<T>* rightNeighbourAVL(T _val) {
             return rightNeighbourUtil(root, _val);
         }
 

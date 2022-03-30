@@ -22,19 +22,60 @@ class LineStatus {
         status.inorder();
     }
 
-    Segment leftNeighbour(Segment s) {
-        
+    pair<bool, Segment> leftNeighbour(Segment s) {
+        AVLTreeNode<Segment>* predecessor = status.leftNeighbourAVL(s);
+        if(predecessor == NULL) {
+            return make_pair(false, s);
+        }
+        return make_pair(true, predecessor->val);
     }
 
-    Segment rightNeighbour(Segment s) {
-        
+    pair<bool, Segment> rightNeighbour(Segment s) {
+        AVLTreeNode<Segment>* successor = status.rightNeighbourAVL(s);
+        if(successor == NULL) {
+            return make_pair(false, s);
+        }
+        return make_pair(true, successor->val);
     }
 
     vector<Segment> neighbours(Point p) {
-        
+        AVLTreeNode<Segment> *pre, *suc;
+        neighboursUtil(status.root, p, pre, suc);
+
+        vector<Segment> neighbrs;
+        neighbrs.push_back(pre->val);
+        neighbrs.push_back(suc->val);
+        return neighbrs;
     }
 
     protected:
+    void neighboursUtil(AVLTreeNode<Segment> *node, Point p, AVLTreeNode<Segment> *&pre, AVLTreeNode<Segment> *&suc) {
+        if(node == NULL) {
+            return;
+        }
+
+        float node_x = node->val.x(Segment::sweeplineY);
+        float point_x = p.x;
+        if(node_x < point_x) {
+            pre = node;
+            neighboursUtil(node->right, p, pre, suc);
+        } else if(node_x > point_x) {
+            suc = node;
+            neighboursUtil(node->left, p, pre, suc);
+        } else {
+            // node_x == point_x
+            if(node->left != NULL) {
+                pre = status.maxNode(node->left);
+            }
+
+            if(node->right != NULL) {
+                suc = status.minNode(node->right);
+            }
+
+            return;
+        }
+    }
+
     // AVLTreeNode<Segment> *leftNeighbourUtil(AVLTreeNode<Segment> *node, Point p, AVLTreeNode<Segment> *pre = NULL) {
     //     if(node == NULL)
     //         return NULL;

@@ -7,7 +7,7 @@ class Segment {
     public:
     Point st, en; // start and end points of the segment
     Slope slope;
-    static long double sweeplineY; // Y coordinate for the sweep line
+    static float sweeplineY; // Y coordinate for the sweep line
 
     Segment() {
 
@@ -96,8 +96,8 @@ class Segment {
     }
 };
 
-long double Segment::sweeplineY = 0.0;
+float Segment::sweeplineY = 0.0;
 
-void changeY(long double Y) {
+void changeY(float Y) {
     Segment::sweeplineY = Y;
 }

@@ -2,9 +2,9 @@
 #include <iostream>
 #include <limits.h>
 #include "utils.h"
-#include "AVLTree.h"
 #include "Segment.h"
 #include "Event.h"
+#include "AVLTree.h"
 #include "EventQueue.h"
 #include "LineStatus.h"
 
@@ -30,15 +30,26 @@ void findNewEvent(Segment s_l, Segment s_r, Point p) {
             event in Q
         2.  then Insert the intersection point as an event into Q.
     */
+
+    // Steps to figure out whether line segments intersect:
+    // 1. 
+
+    cout << "\n************\n";
+    cout << "Find new event function";
+    cout << "\nSegment left " << s_l;
+    cout << "\nSegment right " << s_r;
+
+    cout << "\nPoint " << p;
+    cout << "\n************\n";
 }
 
 Segment findLeftMostSeg(vector<Segment> lineSet) {
     // left most segment is the segment with min x coordinate for a particular y
-    long double min_x = lineSet[0].x(Segment::sweeplineY);
+    float min_x = lineSet[0].x(Segment::sweeplineY);
     Segment mn = lineSet[0];
 
     for(int i = 0; i < lineSet.size(); i++) {
-        long double x = lineSet[i].x(Segment::sweeplineY);
+        float x = lineSet[i].x(Segment::sweeplineY);
         if(x < min_x) {
             min_x = x;
             mn = lineSet[i];
@@ -50,11 +61,11 @@ Segment findLeftMostSeg(vector<Segment> lineSet) {
 
 Segment findRightMostSeg(vector<Segment> lineSet) {
     // right most segment is the segment with max x coordinate for a particular y
-    long double max_x = lineSet[0].x(Segment::sweeplineY);
+    float max_x = lineSet[0].x(Segment::sweeplineY);
     Segment mx = lineSet[0];
 
     for(int i = 0; i < lineSet.size(); i++) {
-        long double x = lineSet[i].x(Segment::sweeplineY);
+        float x = lineSet[i].x(Segment::sweeplineY);
         if(x > max_x) {
             max_x = x;
             mx = lineSet[i];
@@ -114,26 +125,37 @@ void handleEventPoint(Event e) {
         status_queue.insert(UCset[i]);
     }
 
-    cout << "Printing...\n";
+    cout << "Printing Status Queue...\n";
     status_queue.print();
 
     cout << "Printing intersections...\n" << intersections.size();
+
     Point p(e.x, e.y);
 
     if(UCset.size() == 0) {
+        cout << "Size 0";
+        return;
         // TODO: 1. find left and right neighbours
         //       2. find new event points
         
         // find the neighbour segments below the sweep line for a point p
         vector<Segment> neighbours = status_queue.neighbours(p);
+        findNewEvent(neighbours[0], neighbours[1], p);
+
     } else {
         Segment leftMostSeg = findLeftMostSeg(UCset);
-        Segment s_l = status_queue.leftNeighbour(leftMostSeg);
-        findNewEvent(s_l, leftMostSeg, p);
+        pair<bool,Segment> p_l = status_queue.leftNeighbour(leftMostSeg);
+        Segment s_l = p_l.second;
+        if(p_l.first) {
+            findNewEvent(s_l, leftMostSeg, p);
+        }
 
         Segment rightMostSeg = findRightMostSeg(UCset);
-        Segment s_r = status_queue.rightNeighbour(rightMostSeg);
-        findNewEvent(s_r, rightMostSeg, p);
+        pair<bool,Segment> p_r = status_queue.rightNeighbour(rightMostSeg);
+        Segment s_r = p_r.second;
+        if(p_r.first) {
+            findNewEvent(s_r, rightMostSeg, p);
+        }
     }
 }
 
@@ -159,7 +181,9 @@ int main() {
     }
 
     event_queue = initEventQueue(segmentList);
-    event_queue.print();
+    // event_queue.print();
     cout << "Find intersections...\n";
     findIntersections(event_queue);
+
+    return 0;
 }
