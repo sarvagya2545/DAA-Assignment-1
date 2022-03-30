@@ -134,15 +134,20 @@ void handleEventPoint(Event e) {
 
     if(UCset.size() == 0) {
         cout << "Size 0";
-        return;
-        // TODO: 1. find left and right neighbours
-        //       2. find new event points
-        
-        // find the neighbour segments below the sweep line for a point p
-        vector<Segment> neighbours = status_queue.neighbours(p);
-        findNewEvent(neighbours[0], neighbours[1], p);
+        pair<bool, vector<Segment>> neighbours = status_queue.neighbours(p);
+
+        if(neighbours.first) {
+            vector<Segment> neighbourList = neighbours.second;
+            cout << "\n** ** ** ** ** **\n";
+            cout << neighbourList[0] << "\t" << neighbourList[1];
+            cout << "\n** ** ** ** ** **\n";
+
+            findNewEvent(neighbourList[0], neighbourList[1], p);
+        }
 
     } else {
+
+        cout << "Size not 0";
         Segment leftMostSeg = findLeftMostSeg(UCset);
         pair<bool,Segment> p_l = status_queue.leftNeighbour(leftMostSeg);
         Segment s_l = p_l.second;
@@ -181,7 +186,7 @@ int main() {
     }
 
     event_queue = initEventQueue(segmentList);
-    // event_queue.print();
+    event_queue.print();
     cout << "Find intersections...\n";
     findIntersections(event_queue);
 

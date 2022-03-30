@@ -38,14 +38,17 @@ class LineStatus {
         return make_pair(true, successor->val);
     }
 
-    vector<Segment> neighbours(Point p) {
-        AVLTreeNode<Segment> *pre, *suc;
+    pair<bool,vector<Segment>> neighbours(Point p) {
+        AVLTreeNode<Segment> *pre = NULL, *suc = NULL;
         neighboursUtil(status.root, p, pre, suc);
-
+        
         vector<Segment> neighbrs;
+        if(pre == NULL || suc == NULL) {
+            return make_pair(false, neighbrs);
+        }
         neighbrs.push_back(pre->val);
         neighbrs.push_back(suc->val);
-        return neighbrs;
+        return make_pair(true, neighbrs);
     }
 
     protected:
