@@ -1,3 +1,5 @@
+using namespace std;
+
 class Point {
     public:
     float x;

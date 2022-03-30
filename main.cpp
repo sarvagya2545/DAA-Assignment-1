@@ -12,6 +12,19 @@ LineStatus status_queue;
 EventQueue event_queue;
 vector<pair<Point, vector<vector<Segment>>>> intersections;
 
+void printIntersections(vector<pair<Point, vector<vector<Segment>>>> intersections) {
+    cout << "Printing intersections:\n";
+    cout << "\n*** *** *** *** *** *** *** *** *** *** ***\n";
+    cout << "\n*** *** *** *** *** *** *** *** *** *** ***\n";
+    cout << "\n*** *** *** *** *** *** *** *** *** *** ***\n";
+    for(int i = 0; i < intersections.size(); i++) {
+        cout << intersections[i].first << "\n";
+    }
+    cout << "\n*** *** *** *** *** *** *** *** *** *** ***\n";
+    cout << "\n*** *** *** *** *** *** *** *** *** *** ***\n";
+    cout << "\n*** *** *** *** *** *** *** *** *** *** ***\n";
+}
+
 EventQueue initEventQueue(vector<Segment> segmentList) {
     EventQueue event_queue;
 
@@ -23,24 +36,46 @@ EventQueue initEventQueue(vector<Segment> segmentList) {
     return event_queue;
 }
 
+pair<bool, pair<float, float>> intersect(Point A, Point B, Point C, Point D){
+    float a1 = B.y - A.y;
+    float b1 = A.x - B.x;
+    float c1 = a1*(A.x) + b1*(A.y);
+ 
+    float a2 = D.y - C.y;
+    float b2 = C.x - D.x;
+    float c2 = a1*(C.x) + b1*(C.y);
+ 
+    float determinant = a1*b2 - a2*b1;
+ 
+    if (determinant == 0)          //The lines are parallel
+        return make_pair(false, make_pair(FLT_MAX, FLT_MAX));
+    
+    else{
+        float x = (b2*c1 - b1*c2)/determinant;      // x intersection point
+        float y = (a1*c2 - a2*c1)/determinant;      // y intersection point
+ 
+        // check if (x, y) lies on both the lines
+        if(min(A.x, B.x) <= x <= max (A.x, B.x) && min(A.y, B.y) <= y <= max (A.y, B.y) 
+          && min(C.x, D.x) <= x <= max (C.x, D.x) && min(C.x, D.x) <= x <= max (C.x, D.x))
+            return make_pair(true, make_pair(x, y));
+ 
+        else
+            return make_pair(false, make_pair(FLT_MAX, FLT_MAX));
+    }
+}
+
 void findNewEvent(Segment s_l, Segment s_r, Point p) {
-    /*
-        1.  if sl and sr intersect below the sweep line, or on it and to the right of the
-            current event point p, and the intersection is not yet present as an
-            event in Q
-        2.  then Insert the intersection point as an event into Q.
-    */
-
-    // Steps to figure out whether line segments intersect:
-    // 1. 
-
-    cout << "\n************\n";
-    cout << "Find new event function";
-    cout << "\nSegment left " << s_l;
-    cout << "\nSegment right " << s_r;
-
-    cout << "\nPoint " << p;
-    cout << "\n************\n";
+    cout << "S_l" << s_l;
+    cout << "S_r" << s_r;
+    pair<bool, pair<float, float>> ans = intersect(s_l.st, s_l.en, s_r.st, s_r.en);
+    bool hasIntersection = ans.first;
+    pair<float, float> coor = ans.second;
+    if(hasIntersection) {
+        Point intersection_point(coor.first, coor.second);
+        cout << "\nintersection_point\t" << intersection_point;
+        // event_queue.insert(intersection_point, s_l);
+        // event_queue.insert(intersection_point, s_r);
+    }
 }
 
 Segment findLeftMostSeg(vector<Segment> lineSet) {
@@ -125,10 +160,10 @@ void handleEventPoint(Event e) {
         status_queue.insert(UCset[i]);
     }
 
-    cout << "Printing Status Queue...\n";
-    status_queue.print();
+    // cout << "Printing Status Queue...\n";
+    // status_queue.print();
 
-    cout << "Printing intersections...\n" << intersections.size();
+    // cout << "Printing intersections...\n" << intersections.size();
 
     Point p(e.x, e.y);
 
@@ -138,9 +173,9 @@ void handleEventPoint(Event e) {
 
         if(neighbours.first) {
             vector<Segment> neighbourList = neighbours.second;
-            cout << "\n** ** ** ** ** **\n";
-            cout << neighbourList[0] << "\t" << neighbourList[1];
-            cout << "\n** ** ** ** ** **\n";
+            // cout << "\n** ** ** ** ** **\n";
+            // cout << neighbourList[0] << "\t" << neighbourList[1];
+            // cout << "\n** ** ** ** ** **\n";
 
             findNewEvent(neighbourList[0], neighbourList[1], p);
         }
@@ -152,6 +187,7 @@ void handleEventPoint(Event e) {
         pair<bool,Segment> p_l = status_queue.leftNeighbour(leftMostSeg);
         Segment s_l = p_l.second;
         if(p_l.first) {
+            // cout << "S_l" << s_l;
             findNewEvent(s_l, leftMostSeg, p);
         }
 
@@ -159,15 +195,16 @@ void handleEventPoint(Event e) {
         pair<bool,Segment> p_r = status_queue.rightNeighbour(rightMostSeg);
         Segment s_r = p_r.second;
         if(p_r.first) {
+            // cout << "S_r" << s_r;
             findNewEvent(s_r, rightMostSeg, p);
         }
     }
 }
 
 void findIntersections(EventQueue event_q) {
-    cout << "Inside findIntersections...\n";
+    // cout << "Inside findIntersections...\n";
     while(!event_q.empty()) {
-        cout << "Event handle...\n";
+        // cout << "Event handle...\n";
         Event nextEvent = event_q.next();
         handleEventPoint(nextEvent);
     }
@@ -186,9 +223,11 @@ int main() {
     }
 
     event_queue = initEventQueue(segmentList);
-    event_queue.print();
-    cout << "Find intersections...\n";
+    // event_queue.print();
+    // cout << "Find intersections...\n";
     findIntersections(event_queue);
+
+    printIntersections(intersections);
 
     return 0;
 }

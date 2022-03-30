@@ -1,12 +1,11 @@
 #include <iostream>
-#include "Slope.h"
 #include "Point.h"
 using namespace std;
 
 class Segment {
     public:
     Point st, en; // start and end points of the segment
-    Slope slope;
+    // Slope slope;
     static float sweeplineY; // Y coordinate for the sweep line
 
     Segment() {
@@ -42,7 +41,7 @@ class Segment {
         (this->st).y = hi_y;
         (this->en).x = lo_x;
         (this->en).y = lo_y;
-        this->slope.define(x1,y1,x2,y2);
+        // this->slope.define(x1,y1,x2,y2);
     }
 
     // x coordinate value at a particular y value
@@ -52,6 +51,13 @@ class Segment {
     }
 
     point_seg_rel findPoint(Point p) {
+
+        if(st.y == en.y) {
+            if(p.x == st.x) return U;
+            if(p.x == en.x) return L;
+            return C;
+        }
+
         float px = x(p.y);
 
         if(px == p.x) {
@@ -68,9 +74,9 @@ class Segment {
         float this_x = this->x(sweeplineY);
         float next_x = s.x(sweeplineY);
 
-        if(this_x == next_x) {
-            return this->slope < s.slope;
-        }
+        // if(this_x == next_x) {
+        //     return this->slope < s.slope;
+        // }
 
         return this_x < next_x;
     }
@@ -79,9 +85,9 @@ class Segment {
         float this_x = this->x(sweeplineY);
         float next_x = s.x(sweeplineY);
 
-        if(this_x == next_x) {
-            return this->slope > s.slope;
-        }
+        // if(this_x == next_x) {
+        //     return this->slope > s.slope;
+        // }
 
         return this_x > next_x;
     }
