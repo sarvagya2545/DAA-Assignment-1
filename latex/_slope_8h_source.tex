@@ -1,0 +1,74 @@
+\hypertarget{_slope_8h_source}{}\doxysection{Slope.\+h}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{2 \textcolor{keyword}{using namespace }std;}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{keyword}{enum} slope\_t \{ undefined, rational , inf \};}
+\DoxyCodeLine{5 }
+\DoxyCodeLine{6 \textcolor{keyword}{class }\mbox{\hyperlink{class_slope}{Slope}} \{}
+\DoxyCodeLine{7     \textcolor{keyword}{public}:}
+\DoxyCodeLine{8     slope\_t t = undefined; \textcolor{comment}{// type of slope}}
+\DoxyCodeLine{9     \textcolor{keywordtype}{double} m = INT\_MAX;}
+\DoxyCodeLine{10     \mbox{\hyperlink{class_slope}{Slope}}() \{}
+\DoxyCodeLine{11         slope\_t t = undefined;}
+\DoxyCodeLine{12     \};}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14     \mbox{\hyperlink{class_slope}{Slope}}(\textcolor{keywordtype}{float} x0, \textcolor{keywordtype}{float} y0, \textcolor{keywordtype}{float} x1, \textcolor{keywordtype}{float} y1) \{}
+\DoxyCodeLine{15         slope\_t t = undefined;}
+\DoxyCodeLine{16         define(x0,y0,x1,y1);}
+\DoxyCodeLine{17     \};}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19     \textcolor{keywordtype}{void} define(\textcolor{keywordtype}{float} x0, \textcolor{keywordtype}{float} y0, \textcolor{keywordtype}{float} x1, \textcolor{keywordtype}{float} y1) \{}
+\DoxyCodeLine{20         \textcolor{keywordflow}{if}(t == undefined) \{}
+\DoxyCodeLine{21             \textcolor{keywordflow}{if}(x0 == x1) \{}
+\DoxyCodeLine{22                 t = inf;}
+\DoxyCodeLine{23             \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{24                 t = rational;}
+\DoxyCodeLine{25                 m = (y1 -\/ y0) / (x1 -\/ x0);}
+\DoxyCodeLine{26             \}}
+\DoxyCodeLine{27         \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{28             cout << \textcolor{stringliteral}{"{}Slope already has been defined for this instance. The slope is: "{}} << this-\/>m;}
+\DoxyCodeLine{29         \}}
+\DoxyCodeLine{30     \};}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32     \textcolor{keywordtype}{bool} operator > (\textcolor{keyword}{const} \mbox{\hyperlink{class_slope}{Slope}}\& s) \{}
+\DoxyCodeLine{33         \textcolor{keywordflow}{if}(this-\/>t == inf) \{}
+\DoxyCodeLine{34             \textcolor{keywordflow}{return} s.t != inf \&\& s.m > 0;}
+\DoxyCodeLine{35         \}}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{37         \textcolor{keywordflow}{if}(s.t == inf) \{}
+\DoxyCodeLine{38             \textcolor{keywordflow}{return} this-\/>m < 0;}
+\DoxyCodeLine{39         \}}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41         \textcolor{keywordtype}{bool} s\_pos = s.m > 0;}
+\DoxyCodeLine{42         \textcolor{keywordtype}{bool} this\_pos = this-\/>m > 0;}
+\DoxyCodeLine{43 }
+\DoxyCodeLine{44         \textcolor{keywordflow}{if}(s\_pos == this\_pos) \{}
+\DoxyCodeLine{45             \textcolor{keywordflow}{return} this-\/>m > s.m;}
+\DoxyCodeLine{46         \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{47             \textcolor{keywordflow}{return} s\_pos;}
+\DoxyCodeLine{48         \}}
+\DoxyCodeLine{49     \}}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{51     \textcolor{keywordtype}{bool} operator < (\textcolor{keyword}{const} \mbox{\hyperlink{class_slope}{Slope}}\& s) \{}
+\DoxyCodeLine{52         \textcolor{keywordflow}{if}(this-\/>t == inf) \{}
+\DoxyCodeLine{53             \textcolor{keywordflow}{return} s.t != inf \&\& s.m < 0;}
+\DoxyCodeLine{54         \}}
+\DoxyCodeLine{55 }
+\DoxyCodeLine{56         \textcolor{keywordflow}{if}(s.t == inf) \{}
+\DoxyCodeLine{57             \textcolor{keywordflow}{return} this-\/>m > 0;}
+\DoxyCodeLine{58         \}}
+\DoxyCodeLine{59 }
+\DoxyCodeLine{60         \textcolor{keywordtype}{bool} s\_pos = s.m > 0;}
+\DoxyCodeLine{61         \textcolor{keywordtype}{bool} this\_pos = this-\/>m > 0;}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{63         \textcolor{keywordflow}{if}(s\_pos == this\_pos) \{}
+\DoxyCodeLine{64             \textcolor{keywordflow}{return} this-\/>m < s.m;}
+\DoxyCodeLine{65         \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{66             \textcolor{keywordflow}{return} this\_pos;}
+\DoxyCodeLine{67         \}}
+\DoxyCodeLine{68     \}}
+\DoxyCodeLine{69 \};}
+
+\end{DoxyCode}

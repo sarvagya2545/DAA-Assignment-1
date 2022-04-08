@@ -1,0 +1,154 @@
+\hypertarget{class_line_status}{}\doxysection{Line\+Status Class Reference}
+\label{class_line_status}\index{LineStatus@{LineStatus}}
+
+
+Class representation for Status Queue.  
+
+
+
+
+{\ttfamily \#include $<$Line\+Status.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_line_status_a26557082a63847cc5df695951e1868d2}{insert}} (\mbox{\hyperlink{class_segment}{Segment}} s)
+\begin{DoxyCompactList}\small\item\em insert function \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_line_status_abdb544636e5707a5749360c20eaf0764}{remove}} (\mbox{\hyperlink{class_segment}{Segment}} s)
+\begin{DoxyCompactList}\small\item\em remove function \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_line_status_a8fd2b534449ff825c09bb1fc3eea1d73}\label{class_line_status_a8fd2b534449ff825c09bb1fc3eea1d73}} 
+void {\bfseries print} ()
+\begin{DoxyCompactList}\small\item\em prints the inorder representation fo the status structure \end{DoxyCompactList}\item 
+pair$<$ bool, \mbox{\hyperlink{class_segment}{Segment}} $>$ \mbox{\hyperlink{class_line_status_af7f4c325d1d5a82695fa944c062f26be}{left\+Neighbour}} (\mbox{\hyperlink{class_segment}{Segment}} s)
+\begin{DoxyCompactList}\small\item\em left neighbour \end{DoxyCompactList}\item 
+pair$<$ bool, \mbox{\hyperlink{class_segment}{Segment}} $>$ \mbox{\hyperlink{class_line_status_a36819bcc7635cfe2c8d5c54709aa53ed}{right\+Neighbour}} (\mbox{\hyperlink{class_segment}{Segment}} s)
+\begin{DoxyCompactList}\small\item\em right neighbour \end{DoxyCompactList}\item 
+pair$<$ bool, vector$<$ \mbox{\hyperlink{class_segment}{Segment}} $>$ $>$ \mbox{\hyperlink{class_line_status_a8c124173a4d034cb2cb8c92a25399aed}{neighbours}} (\mbox{\hyperlink{class_point}{Point}} p)
+\begin{DoxyCompactList}\small\item\em left \& right neighbour of the point p \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_line_status_a2fbdd0a0b06243fc23f37f3434c4f9e5}\label{class_line_status_a2fbdd0a0b06243fc23f37f3434c4f9e5}} 
+\mbox{\hyperlink{class_a_v_l_tree}{AVLTree}}$<$ \mbox{\hyperlink{class_segment}{Segment}} $>$ {\bfseries status}
+\begin{DoxyCompactList}\small\item\em AVL tree representation for status queue. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_line_status_a8e798f582b889b091376a7ed56abdfeb}{neighbours\+Util}} (\mbox{\hyperlink{class_a_v_l_tree_node}{AVLTree\+Node}}$<$ \mbox{\hyperlink{class_segment}{Segment}} $>$ $\ast$node, \mbox{\hyperlink{class_point}{Point}} p, \mbox{\hyperlink{class_a_v_l_tree_node}{AVLTree\+Node}}$<$ \mbox{\hyperlink{class_segment}{Segment}} $>$ $\ast$\&pre, \mbox{\hyperlink{class_a_v_l_tree_node}{AVLTree\+Node}}$<$ \mbox{\hyperlink{class_segment}{Segment}} $>$ $\ast$\&suc)
+\begin{DoxyCompactList}\small\item\em Utility function to find the neighbours of a particular node in the status structure. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class representation for Status Queue. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_line_status_a26557082a63847cc5df695951e1868d2}\label{class_line_status_a26557082a63847cc5df695951e1868d2}} 
+\index{LineStatus@{LineStatus}!insert@{insert}}
+\index{insert@{insert}!LineStatus@{LineStatus}}
+\doxysubsubsection{\texorpdfstring{insert()}{insert()}}
+{\footnotesize\ttfamily void Line\+Status\+::insert (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_segment}{Segment}}}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+insert function 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & \mbox{\hyperlink{class_segment}{Segment}} \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_line_status_af7f4c325d1d5a82695fa944c062f26be}\label{class_line_status_af7f4c325d1d5a82695fa944c062f26be}} 
+\index{LineStatus@{LineStatus}!leftNeighbour@{leftNeighbour}}
+\index{leftNeighbour@{leftNeighbour}!LineStatus@{LineStatus}}
+\doxysubsubsection{\texorpdfstring{leftNeighbour()}{leftNeighbour()}}
+{\footnotesize\ttfamily pair$<$ bool, \mbox{\hyperlink{class_segment}{Segment}} $>$ Line\+Status\+::left\+Neighbour (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_segment}{Segment}}}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+left neighbour 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \mbox{\hyperlink{class_segment}{Segment}}} & s \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+pair$<$bool, Segment$>$ to show if the left neighbour exists and the segment which is the left neighbour 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_line_status_a8c124173a4d034cb2cb8c92a25399aed}\label{class_line_status_a8c124173a4d034cb2cb8c92a25399aed}} 
+\index{LineStatus@{LineStatus}!neighbours@{neighbours}}
+\index{neighbours@{neighbours}!LineStatus@{LineStatus}}
+\doxysubsubsection{\texorpdfstring{neighbours()}{neighbours()}}
+{\footnotesize\ttfamily pair$<$ bool, vector$<$ \mbox{\hyperlink{class_segment}{Segment}} $>$ $>$ Line\+Status\+::neighbours (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_point}{Point}}}]{p }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+left \& right neighbour of the point p 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \mbox{\hyperlink{class_point}{Point}}} & p \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+pair$<$bool, vector$<$\+Segment$>$$>$ to show if the left \& right neighbour exists and the vector$<$\+Segment$>$ which is the left \& the right neighbour 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_line_status_a8e798f582b889b091376a7ed56abdfeb}\label{class_line_status_a8e798f582b889b091376a7ed56abdfeb}} 
+\index{LineStatus@{LineStatus}!neighboursUtil@{neighboursUtil}}
+\index{neighboursUtil@{neighboursUtil}!LineStatus@{LineStatus}}
+\doxysubsubsection{\texorpdfstring{neighboursUtil()}{neighboursUtil()}}
+{\footnotesize\ttfamily void Line\+Status\+::neighbours\+Util (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_a_v_l_tree_node}{AVLTree\+Node}}$<$ \mbox{\hyperlink{class_segment}{Segment}} $>$ $\ast$}]{node,  }\item[{\mbox{\hyperlink{class_point}{Point}}}]{p,  }\item[{\mbox{\hyperlink{class_a_v_l_tree_node}{AVLTree\+Node}}$<$ \mbox{\hyperlink{class_segment}{Segment}} $>$ $\ast$\&}]{pre,  }\item[{\mbox{\hyperlink{class_a_v_l_tree_node}{AVLTree\+Node}}$<$ \mbox{\hyperlink{class_segment}{Segment}} $>$ $\ast$\&}]{suc }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Utility function to find the neighbours of a particular node in the status structure. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em node} & an \mbox{\hyperlink{class_a_v_l_tree_node}{AVLTree\+Node$<$\+Segment$>$}} \\
+\hline
+{\em p} & \mbox{\hyperlink{class_point}{Point}} p \\
+\hline
+{\em pre} & \mbox{\hyperlink{class_a_v_l_tree_node}{AVLTree\+Node$<$\+Segment$>$}} pointer which points to predecessor of the node at the end of execution \\
+\hline
+{\em suc} & \mbox{\hyperlink{class_a_v_l_tree_node}{AVLTree\+Node$<$\+Segment$>$}} pointer which points to successor of the node at the end of execution \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_line_status_abdb544636e5707a5749360c20eaf0764}\label{class_line_status_abdb544636e5707a5749360c20eaf0764}} 
+\index{LineStatus@{LineStatus}!remove@{remove}}
+\index{remove@{remove}!LineStatus@{LineStatus}}
+\doxysubsubsection{\texorpdfstring{remove()}{remove()}}
+{\footnotesize\ttfamily void Line\+Status\+::remove (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_segment}{Segment}}}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+remove function 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & \mbox{\hyperlink{class_segment}{Segment}} \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_line_status_a36819bcc7635cfe2c8d5c54709aa53ed}\label{class_line_status_a36819bcc7635cfe2c8d5c54709aa53ed}} 
+\index{LineStatus@{LineStatus}!rightNeighbour@{rightNeighbour}}
+\index{rightNeighbour@{rightNeighbour}!LineStatus@{LineStatus}}
+\doxysubsubsection{\texorpdfstring{rightNeighbour()}{rightNeighbour()}}
+{\footnotesize\ttfamily pair$<$ bool, \mbox{\hyperlink{class_segment}{Segment}} $>$ Line\+Status\+::right\+Neighbour (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_segment}{Segment}}}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+right neighbour 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \mbox{\hyperlink{class_segment}{Segment}}} & s \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+pair$<$bool, Segment$>$ to show if the right neighbour exists and the segment which is the right neighbour 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Line\+Status.\+h\end{DoxyCompactItemize}

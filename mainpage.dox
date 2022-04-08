@@ -1,0 +1,65 @@
+Problem statement
+ 
+Consider a set of line segments given to you. You want to compute all the intersection points of these line segments and report them. This problem is a well-known geometric problem having implications in many applications. An efficient solution to this problem was given by Bentley and Ottmann in 1979.
+
+
+
+For example, in the above diagram, S1, S2, S3, S4, S5, S6, S7 and S8 are the line segments provided. The problem is to output the intersection points of these line segments. In this case, the unmarked point right at the middle of the line ‘l’ is the required output
+
+Approach used
+ 
+Let S := {s1,s2,...,sn} be the set of segments for which we want to compute all intersections. We want to avoid testing pairs of segments that are far apart. But how can we do this? Let’s first try to rule out an easy case. Define the y-interval of a segment to be its orthogonal projection onto the y-axis. When the y-intervals of a pair of segments do not overlap—we could say that they are far apart in the y-direction—then they cannot intersect. Hence, we only need to test pairs of segments whose y-intervals overlap, that is, pairs for which there exists a horizontal line that intersects both segments. To find these pairs we imagine sweeping a line  downwards over the plane, starting from a position above all segments. While we sweep the imaginary line, we keep track of all segments intersecting it so that we can find the pairs we need. This type of algorithm is called a plane sweep algorithm and the line  is called the sweep line. The status of the sweep line is the set of segments intersecting it. The status changes while the sweep line moves downwards, but not continuously. Only at particular points is an update of the status required. We call these points the event points of the plane sweep algorithm. In this algorithm the event points are the endpoints of the segments. The moments at which the sweep line reaches an event point are the only moments when the algorithm actually does something: it updates the status of the sweep line and performs some intersection tests. In particular, if the event point is the upper endpoint of a segment, then a new segment starts intersecting the sweep line and must be added to the status. This segment is tested for intersection against the ones already intersecting the sweep line. If the event point is a lower endpoint, a segment stops intersecting the sweep line and must be deleted from the status. This way we only test pairs of segments for which there is a horizontal line that intersects both segments. Unfortunately, this is not enough: there are still situations where we test a quadratic number of pairs, whereas there is only a small number of intersection points. A simple example is a set of vertical segments that all intersect the x-axis. So the algorithm is not output-sensitive. The problem is that two segments that intersect the sweep line can still be far apart in the horizontal direction. Let’s order the segments from left to right as they intersect the sweep line, to include the idea of being close in the horizontal direction. We shall only test segments when they are adjacent in the horizontal ordering. This means that we only test any new segment against two segments, namely, the ones immediately left and right of the upper endpoint. Later, when the sweep line has moved downwards to another position, a segment can become adjacent to other segments against which it will be tested. Our new strategy should be reflected in the status of our algorithm: the status now corresponds to the ordered sequence of segments intersecting the sweep line. The new status not only changes at endpoints of segments; it also changes at intersection points, where the order of the intersected segments changes. When this happens we must test the two segments that change position against their new neighbors. This is a new type of event point.
+ 
+Pseudocode :
+FINDINTERSECTIONS(S)
+Input. A set S of line segments in the plane.
+Output. The set of intersection points among the segments in S, with for each intersection point the segments that contain it.
+1. Initialize an empty event queue Q. Next, insert the segment endpoints into Q; when an upper endpoint is inserted, the corresponding segment should be stored with it.
+2. Initialize an empty status structure T.
+3. while Q is not empty
+4. 	do Determine the next event point p in Q and delete it.
+5. 		HANDLEEVENTPOINT(p)
+ 
+HANDLEEVENTPOINT(p)
+1. Let U(p) be the set of segments whose upper endpoint is p; these segments are stored with the event point p. (For horizontal segments, the upper endpoint is by definition the left endpoint.)
+2. Find all segments stored in T that contain p; they are adjacent in T. Let
+L(p) denote the subset of segments found whose lower endpoint is p, and
+let C(p) denote the subset of segments found that contain p in their interior.
+3. if L(p)∪U(p)∪C(p) contains more than one segment
+4. 	then Report p as an intersection, together with L(p), U(p), and C(p).
+5. Delete the segments in L(p)∪C(p) from T.
+6. Insert the segments in U(p)∪C(p) into T. The order of the segments in T
+should correspond to the order in which they are intersected by a sweep
+line just below p. If there is a horizontal segment, it comes last among all
+segments containing p.
+7. (∗ Deleting and re-inserting the segments of C(p) reverses their order. ∗)
+8. if U(p)∪C(p) = /0
+9.	 then Let sl and sr be the left and right neighbors of p in T.
+10. 		FINDNEWEVENT(sl,sr, p)
+11. 	else Let s be the leftmost segment of U(p)∪C(p) in T.
+12. 		Let sl be the left neighbor of s in T.
+13. 		FINDNEWEVENT(sl,s,p)
+14. 		Let s be the rightmost segment of U(p)∪C(p) in T.
+15. 		Let sr be the right neighbor of s in T.
+16. 		FINDNEWEVENT(s,sr, p)
+ 
+FINDNEWEVENT(sl,sr, p)
+1. if sl and sr intersect below the sweep line, or on it and to the right of the
+current event point p, and the intersection is not yet present as an
+event in Q
+2.	 then Insert the intersection point as an event into Q.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Timing Analysis
+ 
+Time Complexity : The Bentley–Ottmann algorithm processes a sequence of ‘2n+k’ events, where ‘n’ denotes the number of input line segments and ’k’ denotes the number of crossings. Each event is processed by a constant number of operations in the binary search tree and the event queue, and (because it contains only segment endpoints and crossings between adjacent segments) the event queue never contains more than ‘3n’ events. All operations take time ‘O(log n)’. Hence the total time for the algorithm is ‘O((n+k) log n)’.

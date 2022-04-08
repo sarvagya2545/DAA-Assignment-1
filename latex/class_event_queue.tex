@@ -1,0 +1,74 @@
+\hypertarget{class_event_queue}{}\doxysection{Event\+Queue Class Reference}
+\label{class_event_queue}\index{EventQueue@{EventQueue}}
+
+
+Implementation of \mbox{\hyperlink{class_event}{Event}} Queue using AVLtree.  
+
+
+
+
+{\ttfamily \#include $<$Event\+Queue.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_event_queue_a1ac35ff19397a33041838727b7229553}\label{class_event_queue_a1ac35ff19397a33041838727b7229553}} 
+bool {\bfseries empty} ()
+\begin{DoxyCompactList}\small\item\em Utility function to check whether the queue is empty or not. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_event}{Event}} \mbox{\hyperlink{class_event_queue_a2264347560f7af929b6202ecd47be5a6}{next}} ()
+\begin{DoxyCompactList}\small\item\em Function to find the next point in the event queue. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_event_queue_ad71e8cebee7025e4eb80532a65666cc2}\label{class_event_queue_ad71e8cebee7025e4eb80532a65666cc2}} 
+void {\bfseries remove} (\mbox{\hyperlink{class_event}{Event}} e)
+\begin{DoxyCompactList}\small\item\em Function to remove an event from the event queue. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_event_queue_ae737ed11ce0d9bdab8c77dd52bb563c4}{insert}} (\mbox{\hyperlink{class_point}{Point}} p, \mbox{\hyperlink{class_segment}{Segment}} s)
+\begin{DoxyCompactList}\small\item\em Function to remove an event from the event queue. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_event_queue_a044794f2983b7f40d1634a3ce4fa0527}\label{class_event_queue_a044794f2983b7f40d1634a3ce4fa0527}} 
+void {\bfseries print} ()
+\begin{DoxyCompactList}\small\item\em Function to print the event queue in inorder fashion. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_event_queue_a9e7431364728a7e58311bc9ce963da22}\label{class_event_queue_a9e7431364728a7e58311bc9ce963da22}} 
+\mbox{\hyperlink{class_a_v_l_tree}{AVLTree}}$<$ \mbox{\hyperlink{class_event}{Event}} $>$ {\bfseries event\+\_\+q}
+\begin{DoxyCompactList}\small\item\em event queue represented using AVL tree of node type \mbox{\hyperlink{class_event}{Event}} \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Implementation of \mbox{\hyperlink{class_event}{Event}} Queue using AVLtree. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_event_queue_ae737ed11ce0d9bdab8c77dd52bb563c4}\label{class_event_queue_ae737ed11ce0d9bdab8c77dd52bb563c4}} 
+\index{EventQueue@{EventQueue}!insert@{insert}}
+\index{insert@{insert}!EventQueue@{EventQueue}}
+\doxysubsubsection{\texorpdfstring{insert()}{insert()}}
+{\footnotesize\ttfamily void Event\+Queue\+::insert (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_point}{Point}}}]{p,  }\item[{\mbox{\hyperlink{class_segment}{Segment}}}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Function to remove an event from the event queue. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p} & A point P which will be inserted into the event queue \\
+\hline
+{\em s} & The segment which will be inserted with the point \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_event_queue_a2264347560f7af929b6202ecd47be5a6}\label{class_event_queue_a2264347560f7af929b6202ecd47be5a6}} 
+\index{EventQueue@{EventQueue}!next@{next}}
+\index{next@{next}!EventQueue@{EventQueue}}
+\doxysubsubsection{\texorpdfstring{next()}{next()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_event}{Event}} Event\+Queue\+::next (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Function to find the next point in the event queue. 
+
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{class_event}{Event}} object which will come next for execution 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Event\+Queue.\+h\end{DoxyCompactItemize}

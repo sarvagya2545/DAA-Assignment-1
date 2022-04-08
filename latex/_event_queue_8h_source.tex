@@ -1,0 +1,54 @@
+\hypertarget{_event_queue_8h_source}{}\doxysection{Event\+Queue.\+h}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#include<stdio.h>}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#include<stdlib.h>}}
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include<algorithm>}}
+\DoxyCodeLine{4 \textcolor{keyword}{using namespace }std;}
+\DoxyCodeLine{5 }
+\DoxyCodeLine{7 \textcolor{keyword}{class }\mbox{\hyperlink{class_event_queue}{EventQueue}} \{}
+\DoxyCodeLine{8     \textcolor{keyword}{public}:}
+\DoxyCodeLine{10     \mbox{\hyperlink{class_a_v_l_tree}{AVLTree<Event>}} \mbox{\hyperlink{class_event_queue_a9e7431364728a7e58311bc9ce963da22}{event\_q}};}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12     \mbox{\hyperlink{class_event_queue}{EventQueue}}() \{}
+\DoxyCodeLine{13         }
+\DoxyCodeLine{14     \}}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{17     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_event_queue_a1ac35ff19397a33041838727b7229553}{empty}}() \{}
+\DoxyCodeLine{18         \textcolor{keywordflow}{return} \mbox{\hyperlink{class_event_queue_a9e7431364728a7e58311bc9ce963da22}{event\_q}}.\mbox{\hyperlink{class_a_v_l_tree_af5b88fc0dbfcb8450ff78bef0ac719d0}{root}} == NULL;}
+\DoxyCodeLine{19     \}}
+\DoxyCodeLine{20 }
+\DoxyCodeLine{23     \mbox{\hyperlink{class_event}{Event}} \mbox{\hyperlink{class_event_queue_a2264347560f7af929b6202ecd47be5a6}{next}}() \{}
+\DoxyCodeLine{24         \textcolor{comment}{// returns next event \& removes it from the event queue}}
+\DoxyCodeLine{25         \mbox{\hyperlink{class_a_v_l_tree_node}{AVLTreeNode<Event>}}* node = \mbox{\hyperlink{class_event_queue_a9e7431364728a7e58311bc9ce963da22}{event\_q}}.\mbox{\hyperlink{class_a_v_l_tree_a3574f6cb529a6524d017544425101027}{minNode}}();}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27         \mbox{\hyperlink{class_event}{Event}} e = node-\/>\mbox{\hyperlink{class_a_v_l_tree_node_a45b795e381680f5db27cdfabaa5c0e72}{val}};}
+\DoxyCodeLine{28         \mbox{\hyperlink{class_event_queue_ad71e8cebee7025e4eb80532a65666cc2}{remove}}(e);}
+\DoxyCodeLine{29         \textcolor{keywordflow}{return} e;}
+\DoxyCodeLine{30     \}}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{33     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_event_queue_ad71e8cebee7025e4eb80532a65666cc2}{remove}}(\mbox{\hyperlink{class_event}{Event}} e) \{}
+\DoxyCodeLine{34         \mbox{\hyperlink{class_event_queue_a9e7431364728a7e58311bc9ce963da22}{event\_q}}.\mbox{\hyperlink{class_a_v_l_tree_a5912d0e7f05213c889ca3e5cce94cade}{remove}}(e);}
+\DoxyCodeLine{35     \}}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{40     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_event_queue_ae737ed11ce0d9bdab8c77dd52bb563c4}{insert}}(\mbox{\hyperlink{class_point}{Point}} p, \mbox{\hyperlink{class_segment}{Segment}} s) \{}
+\DoxyCodeLine{41         \textcolor{comment}{// insert a point with segments passing through it}}
+\DoxyCodeLine{42         point\_seg\_rel type = s.\mbox{\hyperlink{class_segment_a410600c8bbd3bdcd6b5ada19da53bc3a}{findPoint}}(p);}
+\DoxyCodeLine{43         \mbox{\hyperlink{class_event}{Event}} e(p.x, p.y, s, type);}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45         \mbox{\hyperlink{class_a_v_l_tree_node}{AVLTreeNode<Event>}}* res = this-\/>event\_q.\mbox{\hyperlink{class_a_v_l_tree_a3aa28efbf34605cc6fd073c6710be9d3}{search}}(e);}
+\DoxyCodeLine{46         \textcolor{keywordflow}{if}(res == NULL) \{}
+\DoxyCodeLine{47             \textcolor{comment}{// if no event matched, insert a new event}}
+\DoxyCodeLine{48             \mbox{\hyperlink{class_event_queue_a9e7431364728a7e58311bc9ce963da22}{event\_q}}.\mbox{\hyperlink{class_a_v_l_tree_a7ecbcf0e55482bb810f6101e4f1f05ff}{insert}}(e);}
+\DoxyCodeLine{49         \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{50             \textcolor{comment}{// insert the segments to the current event}}
+\DoxyCodeLine{51             res-\/>\mbox{\hyperlink{class_a_v_l_tree_node_a45b795e381680f5db27cdfabaa5c0e72}{val}}.\mbox{\hyperlink{class_event_a504f9a9c3c645fdc813efe2dd59bc15e}{insertSegment}}(s, type);}
+\DoxyCodeLine{52         \}}
+\DoxyCodeLine{53     \}}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{56     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_event_queue_a044794f2983b7f40d1634a3ce4fa0527}{print}}() \{}
+\DoxyCodeLine{57         this-\/>event\_q.\mbox{\hyperlink{class_a_v_l_tree_a784bbe208594122222ff06ea8a1fdf6a}{inorder}}();}
+\DoxyCodeLine{58     \}}
+\DoxyCodeLine{59 \};}
+
+\end{DoxyCode}

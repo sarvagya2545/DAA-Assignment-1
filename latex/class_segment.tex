@@ -1,0 +1,242 @@
+\hypertarget{class_segment}{}\doxysection{Segment Class Reference}
+\label{class_segment}\index{Segment@{Segment}}
+
+
+class representation of a segment  
+
+
+
+
+{\ttfamily \#include $<$Segment.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_segment_a517a9192405cc014a5535008262da619}{Segment}} (\mbox{\hyperlink{class_point}{Point}} p1, \mbox{\hyperlink{class_point}{Point}} p2)
+\begin{DoxyCompactList}\small\item\em constructor function that takes in 2 points and creates a line segment \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_segment_abacb5bdec3461f67157cf55201447ec7}{Segment}} (float x1, float y1, float x2, float y2)
+\begin{DoxyCompactList}\small\item\em constructor function that takes in 2 points and creates a line segment \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_segment_acb7ccad55618d8f3551e40923f86aecf}{insert}} (float x1, float y1, float x2, float y2)
+\begin{DoxyCompactList}\small\item\em function to initialise segment points \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_segment_ae8fbe029184d1eaf484cb4f804fd57bd}{x}} (float y)
+\begin{DoxyCompactList}\small\item\em find x coordinate value at a particular y value on the segment \end{DoxyCompactList}\item 
+point\+\_\+seg\+\_\+rel \mbox{\hyperlink{class_segment_a410600c8bbd3bdcd6b5ada19da53bc3a}{find\+Point}} (\mbox{\hyperlink{class_point}{Point}} p)
+\begin{DoxyCompactList}\small\item\em finds and defines the point and segment relationship\+: whether the point lies in between, does not lie, lies on the start endpoint / ending endpoint \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_segment_a9c228d46992a9e5a036285f5d4e54f16}{operator$<$}} (\mbox{\hyperlink{class_segment}{Segment}} \&s)
+\begin{DoxyCompactList}\small\item\em Operator overloaded for comparison between segments. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_segment_a57b31aca76756d54035f6f32b6c3eeaa}{operator$>$}} (\mbox{\hyperlink{class_segment}{Segment}} \&s)
+\begin{DoxyCompactList}\small\item\em Operator overloaded for comparison between segments. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_segment_a3e160e3a939fe847f51661417909a270}{operator==}} (\mbox{\hyperlink{class_segment}{Segment}} \&s)
+\begin{DoxyCompactList}\small\item\em Operator overloaded for comparison between segments. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_segment_a5677fb2670e819766764702d5548daaa}\label{class_segment_a5677fb2670e819766764702d5548daaa}} 
+\mbox{\hyperlink{class_point}{Point}} {\bfseries st}
+\item 
+\mbox{\Hypertarget{class_segment_a7d2cc7491c5c7c6459a58ad1fe358571}\label{class_segment_a7d2cc7491c5c7c6459a58ad1fe358571}} 
+\mbox{\hyperlink{class_point}{Point}} {\bfseries en}
+\begin{DoxyCompactList}\small\item\em start and end points of the segment \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_segment_a88a58773e94526aaf8c3857a40427e6f}\label{class_segment_a88a58773e94526aaf8c3857a40427e6f}} 
+static float {\bfseries sweeplineY} = 0.\+0
+\begin{DoxyCompactList}\small\item\em Y coordinate for the sweep line. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+ostream \& \mbox{\hyperlink{class_segment_ad331780594cb5bf40ca8a38f2c13ac85}{operator$<$$<$}} (ostream \&output, const \mbox{\hyperlink{class_segment}{Segment}} \&S)
+\begin{DoxyCompactList}\small\item\em Operator overloaded for output. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+class representation of a segment 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_segment_a517a9192405cc014a5535008262da619}\label{class_segment_a517a9192405cc014a5535008262da619}} 
+\index{Segment@{Segment}!Segment@{Segment}}
+\index{Segment@{Segment}!Segment@{Segment}}
+\doxysubsubsection{\texorpdfstring{Segment()}{Segment()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Segment\+::\+Segment (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_point}{Point}}}]{p1,  }\item[{\mbox{\hyperlink{class_point}{Point}}}]{p2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+constructor function that takes in 2 points and creates a line segment 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p1} & \\
+\hline
+{\em p2} & ~\newline
+ \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_segment_abacb5bdec3461f67157cf55201447ec7}\label{class_segment_abacb5bdec3461f67157cf55201447ec7}} 
+\index{Segment@{Segment}!Segment@{Segment}}
+\index{Segment@{Segment}!Segment@{Segment}}
+\doxysubsubsection{\texorpdfstring{Segment()}{Segment()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Segment\+::\+Segment (\begin{DoxyParamCaption}\item[{float}]{x1,  }\item[{float}]{y1,  }\item[{float}]{x2,  }\item[{float}]{y2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+constructor function that takes in 2 points and creates a line segment 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x1} & \\
+\hline
+{\em y1} & \\
+\hline
+{\em x2} & \\
+\hline
+{\em y2} & ~\newline
+ \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_segment_a410600c8bbd3bdcd6b5ada19da53bc3a}\label{class_segment_a410600c8bbd3bdcd6b5ada19da53bc3a}} 
+\index{Segment@{Segment}!findPoint@{findPoint}}
+\index{findPoint@{findPoint}!Segment@{Segment}}
+\doxysubsubsection{\texorpdfstring{findPoint()}{findPoint()}}
+{\footnotesize\ttfamily point\+\_\+seg\+\_\+rel Segment\+::find\+Point (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_point}{Point}}}]{p }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+finds and defines the point and segment relationship\+: whether the point lies in between, does not lie, lies on the start endpoint / ending endpoint 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p} & \mbox{\hyperlink{class_point}{Point}} p \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+an enum point\+\_\+seg\+\_\+rel which tells whether the point passes lies in between, does not lie, lies on the start endpoint / ending endpoint 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_segment_acb7ccad55618d8f3551e40923f86aecf}\label{class_segment_acb7ccad55618d8f3551e40923f86aecf}} 
+\index{Segment@{Segment}!insert@{insert}}
+\index{insert@{insert}!Segment@{Segment}}
+\doxysubsubsection{\texorpdfstring{insert()}{insert()}}
+{\footnotesize\ttfamily void Segment\+::insert (\begin{DoxyParamCaption}\item[{float}]{x1,  }\item[{float}]{y1,  }\item[{float}]{x2,  }\item[{float}]{y2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+function to initialise segment points 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x1} & \\
+\hline
+{\em y1} & \\
+\hline
+{\em x2} & \\
+\hline
+{\em y2} & ~\newline
+ \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_segment_a9c228d46992a9e5a036285f5d4e54f16}\label{class_segment_a9c228d46992a9e5a036285f5d4e54f16}} 
+\index{Segment@{Segment}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!Segment@{Segment}}
+\doxysubsubsection{\texorpdfstring{operator$<$()}{operator<()}}
+{\footnotesize\ttfamily bool Segment\+::operator$<$ (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_segment}{Segment}} \&}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Operator overloaded for comparison between segments. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & \mbox{\hyperlink{class_segment}{Segment}} s \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+bool ~\newline
+ 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_segment_a3e160e3a939fe847f51661417909a270}\label{class_segment_a3e160e3a939fe847f51661417909a270}} 
+\index{Segment@{Segment}!operator==@{operator==}}
+\index{operator==@{operator==}!Segment@{Segment}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily bool Segment\+::operator== (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_segment}{Segment}} \&}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Operator overloaded for comparison between segments. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & \mbox{\hyperlink{class_segment}{Segment}} s \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+bool ~\newline
+ 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_segment_a57b31aca76756d54035f6f32b6c3eeaa}\label{class_segment_a57b31aca76756d54035f6f32b6c3eeaa}} 
+\index{Segment@{Segment}!operator$>$@{operator$>$}}
+\index{operator$>$@{operator$>$}!Segment@{Segment}}
+\doxysubsubsection{\texorpdfstring{operator$>$()}{operator>()}}
+{\footnotesize\ttfamily bool Segment\+::operator$>$ (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_segment}{Segment}} \&}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Operator overloaded for comparison between segments. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & \mbox{\hyperlink{class_segment}{Segment}} s \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+bool ~\newline
+ 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_segment_ae8fbe029184d1eaf484cb4f804fd57bd}\label{class_segment_ae8fbe029184d1eaf484cb4f804fd57bd}} 
+\index{Segment@{Segment}!x@{x}}
+\index{x@{x}!Segment@{Segment}}
+\doxysubsubsection{\texorpdfstring{x()}{x()}}
+{\footnotesize\ttfamily float Segment\+::x (\begin{DoxyParamCaption}\item[{float}]{y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+find x coordinate value at a particular y value on the segment 
+
+
+\begin{DoxyParams}{Parameters}
+{\em y} & a float value for y coordinate \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+x coordinate at a particular y value on the segment 
+\end{DoxyReturn}
+
+
+\doxysubsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{class_segment_ad331780594cb5bf40ca8a38f2c13ac85}\label{class_segment_ad331780594cb5bf40ca8a38f2c13ac85}} 
+\index{Segment@{Segment}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!Segment@{Segment}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily ostream \& operator$<$$<$ (\begin{DoxyParamCaption}\item[{ostream \&}]{output,  }\item[{const \mbox{\hyperlink{class_segment}{Segment}} \&}]{S }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Operator overloaded for output. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em output} & ostream \\
+\hline
+{\em s} & \mbox{\hyperlink{class_segment}{Segment}} s \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+ostream object 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Segment.\+h\end{DoxyCompactItemize}

@@ -1,0 +1,31 @@
+\hypertarget{_point_8h_source}{}\doxysection{Point.\+h}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{keyword}{using namespace }std;}
+\DoxyCodeLine{2 }
+\DoxyCodeLine{4 \textcolor{keyword}{class }\mbox{\hyperlink{class_point}{Point}} \{}
+\DoxyCodeLine{5     \textcolor{keyword}{public}:}
+\DoxyCodeLine{6     \textcolor{keywordtype}{float} \mbox{\hyperlink{class_point_a05dfe2dfbde813ad234b514f30e662f1}{x}}; }
+\DoxyCodeLine{7     \textcolor{keywordtype}{float} \mbox{\hyperlink{class_point_a6101960c8d2d4e8ea1d32c9234bbeb8d}{y}}; }
+\DoxyCodeLine{8 }
+\DoxyCodeLine{10     \mbox{\hyperlink{class_point_ad92f2337b839a94ce97dcdb439b4325a}{Point}}() \{}
+\DoxyCodeLine{11         this-\/>x = 0;}
+\DoxyCodeLine{12         this-\/>y = 0;}
+\DoxyCodeLine{13     \}}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{18     \mbox{\hyperlink{class_point_a6524332fa4d321ff0a001366a732c7b6}{Point}}(\textcolor{keywordtype}{float} \_x, \textcolor{keywordtype}{float} \_y) \{}
+\DoxyCodeLine{19         this-\/>x = \_x;}
+\DoxyCodeLine{20         this-\/>y = \_y;}
+\DoxyCodeLine{21     \}}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{24     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_point_ae76203c5e803f9c619510971901a6169}{operator == }}(\mbox{\hyperlink{class_point}{Point}}\& p) \{}
+\DoxyCodeLine{25         \textcolor{keywordflow}{return} this-\/>x == p.x \&\& this-\/>y == p.y;}
+\DoxyCodeLine{26     \}}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{29     \textcolor{keyword}{friend} ostream \&\mbox{\hyperlink{class_point_a8037afe52fd59680d029c27227e3c7c7}{operator<<}}(ostream \&output, \textcolor{keyword}{const} \mbox{\hyperlink{class_point}{Point}} \&P) \{}
+\DoxyCodeLine{30         output << \textcolor{stringliteral}{"{}Point: ("{}} << P.\mbox{\hyperlink{class_point_a05dfe2dfbde813ad234b514f30e662f1}{x}} << \textcolor{stringliteral}{"{}, "{}} << P.\mbox{\hyperlink{class_point_a6101960c8d2d4e8ea1d32c9234bbeb8d}{y}} << \textcolor{stringliteral}{"{})"{}};}
+\DoxyCodeLine{31         \textcolor{keywordflow}{return} output;}
+\DoxyCodeLine{32     \}}
+\DoxyCodeLine{33 \};}
+
+\end{DoxyCode}

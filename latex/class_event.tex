@@ -1,0 +1,116 @@
+\hypertarget{class_event}{}\doxysection{Event Class Reference}
+\label{class_event}\index{Event@{Event}}
+
+
+Implementation of \mbox{\hyperlink{class_event}{Event}} class.  
+
+
+
+
+{\ttfamily \#include $<$Event.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_event_abe89ba1fd99d9db53f59b657c776cddc}{Event}} (float \+\_\+x, float \+\_\+y)
+\begin{DoxyCompactList}\small\item\em Constructor function for the event. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_event_ae486adf3a6fdf6fe4e32dc506429272c}{Event}} (float \+\_\+x, float \+\_\+y, \mbox{\hyperlink{class_segment}{Segment}} s, point\+\_\+seg\+\_\+rel t)
+\begin{DoxyCompactList}\small\item\em Constructor function for the event. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_event_a504f9a9c3c645fdc813efe2dd59bc15e}{insert\+Segment}} (\mbox{\hyperlink{class_segment}{Segment}} s, point\+\_\+seg\+\_\+rel t)
+\begin{DoxyCompactList}\small\item\em Function which inserts the segment into the segment list. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_event_aa7516e82071f8838efb69451b0de73ab}\label{class_event_aa7516e82071f8838efb69451b0de73ab}} 
+bool {\bfseries operator$<$} (const \mbox{\hyperlink{class_event}{Event}} \&e)
+\begin{DoxyCompactList}\small\item\em overloaded function for \texorpdfstring{$<$}{<} for comparing events in the AVL tree \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_event_a3b502108aed7007cb1ac350d8ab84bba}\label{class_event_a3b502108aed7007cb1ac350d8ab84bba}} 
+bool {\bfseries operator$>$} (const \mbox{\hyperlink{class_event}{Event}} \&e)
+\begin{DoxyCompactList}\small\item\em overloaded function for \texorpdfstring{$>$}{>} for comparing events in the AVL tree \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_event_a7729a469461554054b2b40bf2eea992c}\label{class_event_a7729a469461554054b2b40bf2eea992c}} 
+bool {\bfseries operator==} (const \mbox{\hyperlink{class_event}{Event}} \&e)
+\begin{DoxyCompactList}\small\item\em overloaded function for == for comparing events in the AVL tree \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_event_aadb78036de288d367c251fbbbbe3f7b4}\label{class_event_aadb78036de288d367c251fbbbbe3f7b4}} 
+float {\bfseries x}
+\begin{DoxyCompactList}\small\item\em x coordinate \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_event_a834125ccd13bfa19aa29160180779c06}\label{class_event_a834125ccd13bfa19aa29160180779c06}} 
+float {\bfseries y}
+\begin{DoxyCompactList}\small\item\em y coordinate \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_event_a1db305e9d1c6fe14886d9ac44fccf678}\label{class_event_a1db305e9d1c6fe14886d9ac44fccf678}} 
+vector$<$ vector$<$ \mbox{\hyperlink{class_segment}{Segment}} $>$ $>$ {\bfseries segments} = vector$<$vector$<$\mbox{\hyperlink{class_segment}{Segment}}$>$$>$ (3, vector$<$\mbox{\hyperlink{class_segment}{Segment}}$>$(0))
+\begin{DoxyCompactList}\small\item\em list of segments passing through the point \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_event_a16a6bf9cbfd05d7e0a8bdb3a913d5291}\label{class_event_a16a6bf9cbfd05d7e0a8bdb3a913d5291}} 
+ostream \& {\bfseries operator$<$$<$} (ostream \&output, const \mbox{\hyperlink{class_event}{Event}} \&E)
+\begin{DoxyCompactList}\small\item\em overloaded print operator for debugging \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Implementation of \mbox{\hyperlink{class_event}{Event}} class. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_event_abe89ba1fd99d9db53f59b657c776cddc}\label{class_event_abe89ba1fd99d9db53f59b657c776cddc}} 
+\index{Event@{Event}!Event@{Event}}
+\index{Event@{Event}!Event@{Event}}
+\doxysubsubsection{\texorpdfstring{Event()}{Event()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Event\+::\+Event (\begin{DoxyParamCaption}\item[{float}]{\+\_\+x,  }\item[{float}]{\+\_\+y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor function for the event. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+x} & floating point value for the x coordinate \\
+\hline
+{\em \+\_\+y} & floating point value for the y coordinate \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_event_ae486adf3a6fdf6fe4e32dc506429272c}\label{class_event_ae486adf3a6fdf6fe4e32dc506429272c}} 
+\index{Event@{Event}!Event@{Event}}
+\index{Event@{Event}!Event@{Event}}
+\doxysubsubsection{\texorpdfstring{Event()}{Event()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Event\+::\+Event (\begin{DoxyParamCaption}\item[{float}]{\+\_\+x,  }\item[{float}]{\+\_\+y,  }\item[{\mbox{\hyperlink{class_segment}{Segment}}}]{s,  }\item[{point\+\_\+seg\+\_\+rel}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor function for the event. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+x} & floating point value for the x coordinate \\
+\hline
+{\em \+\_\+y} & floating point value for the y coordinate \\
+\hline
+{\em s} & \mbox{\hyperlink{class_segment}{Segment}} which passes through the coordinate \\
+\hline
+{\em t} & enum value for relationship between point and segment \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_event_a504f9a9c3c645fdc813efe2dd59bc15e}\label{class_event_a504f9a9c3c645fdc813efe2dd59bc15e}} 
+\index{Event@{Event}!insertSegment@{insertSegment}}
+\index{insertSegment@{insertSegment}!Event@{Event}}
+\doxysubsubsection{\texorpdfstring{insertSegment()}{insertSegment()}}
+{\footnotesize\ttfamily void Event\+::insert\+Segment (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_segment}{Segment}}}]{s,  }\item[{point\+\_\+seg\+\_\+rel}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Function which inserts the segment into the segment list. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & \mbox{\hyperlink{class_segment}{Segment}} which passes through the coordinate \\
+\hline
+{\em t} & enum value for relationship between point and segment \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Event.\+h\end{DoxyCompactItemize}

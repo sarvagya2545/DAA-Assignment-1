@@ -1,0 +1,113 @@
+\hypertarget{_segment_8h_source}{}\doxysection{Segment.\+h}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#include "{}Point.h"{}}}
+\DoxyCodeLine{3 \textcolor{keyword}{using namespace }std;}
+\DoxyCodeLine{4 }
+\DoxyCodeLine{6 \textcolor{keyword}{class }\mbox{\hyperlink{class_segment}{Segment}} \{}
+\DoxyCodeLine{7     \textcolor{keyword}{public}:}
+\DoxyCodeLine{8     \mbox{\hyperlink{class_point}{Point}} st, \mbox{\hyperlink{class_segment_a7d2cc7491c5c7c6459a58ad1fe358571}{en}}; }
+\DoxyCodeLine{9     \textcolor{keyword}{static} \textcolor{keywordtype}{float} \mbox{\hyperlink{class_segment_a88a58773e94526aaf8c3857a40427e6f}{sweeplineY}}; }
+\DoxyCodeLine{10 }
+\DoxyCodeLine{11     \mbox{\hyperlink{class_segment}{Segment}}() \{}
+\DoxyCodeLine{12 }
+\DoxyCodeLine{13     \}}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{18     \mbox{\hyperlink{class_segment_a517a9192405cc014a5535008262da619}{Segment}}(\mbox{\hyperlink{class_point}{Point}} p1, \mbox{\hyperlink{class_point}{Point}} p2) \{}
+\DoxyCodeLine{19         \mbox{\hyperlink{class_segment_acb7ccad55618d8f3551e40923f86aecf}{insert}}(p1.\mbox{\hyperlink{class_point_a05dfe2dfbde813ad234b514f30e662f1}{x}},p1.\mbox{\hyperlink{class_point_a6101960c8d2d4e8ea1d32c9234bbeb8d}{y}},p2.\mbox{\hyperlink{class_point_a05dfe2dfbde813ad234b514f30e662f1}{x}},p2.\mbox{\hyperlink{class_point_a6101960c8d2d4e8ea1d32c9234bbeb8d}{y}});}
+\DoxyCodeLine{20     \}}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{27     \mbox{\hyperlink{class_segment_abacb5bdec3461f67157cf55201447ec7}{Segment}}(\textcolor{keywordtype}{float} x1, \textcolor{keywordtype}{float} y1, \textcolor{keywordtype}{float} x2, \textcolor{keywordtype}{float} y2) \{}
+\DoxyCodeLine{28         \mbox{\hyperlink{class_segment_acb7ccad55618d8f3551e40923f86aecf}{insert}}(x1,y1,x2,y2);}
+\DoxyCodeLine{29     \}}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{36     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_segment_acb7ccad55618d8f3551e40923f86aecf}{insert}}(\textcolor{keywordtype}{float} x1, \textcolor{keywordtype}{float} y1, \textcolor{keywordtype}{float} x2, \textcolor{keywordtype}{float} y2) \{}
+\DoxyCodeLine{37         \textcolor{keywordtype}{float} lo\_x, hi\_x, lo\_y, hi\_y;}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39         \textcolor{keywordflow}{if}(y1 > y2 || (y1 == y2 \&\& (x1 < x2))) \{}
+\DoxyCodeLine{40             hi\_x = x1;}
+\DoxyCodeLine{41             hi\_y = y1;}
+\DoxyCodeLine{42             lo\_x = x2;}
+\DoxyCodeLine{43             lo\_y = y2;}
+\DoxyCodeLine{44         \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{45             hi\_x = x2;}
+\DoxyCodeLine{46             hi\_y = y2;}
+\DoxyCodeLine{47             lo\_x = x1;}
+\DoxyCodeLine{48             lo\_y = y1;}
+\DoxyCodeLine{49         \}}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{51         \textcolor{comment}{// cout << "{}hi\_x: "{} << hi\_x << "{} lo\_x: "{} << lo\_x << "{} hi\_y: "{} << hi\_y << "{} lo\_y: "{} << lo\_y;}}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{53         (this-\/>st).\mbox{\hyperlink{class_segment_ae8fbe029184d1eaf484cb4f804fd57bd}{x}} = hi\_x;}
+\DoxyCodeLine{54         (this-\/>st).y = hi\_y;}
+\DoxyCodeLine{55         (this-\/>\mbox{\hyperlink{class_segment_a7d2cc7491c5c7c6459a58ad1fe358571}{en}}).\mbox{\hyperlink{class_segment_ae8fbe029184d1eaf484cb4f804fd57bd}{x}} = lo\_x;}
+\DoxyCodeLine{56         (this-\/>\mbox{\hyperlink{class_segment_a7d2cc7491c5c7c6459a58ad1fe358571}{en}}).y = lo\_y;}
+\DoxyCodeLine{57         \textcolor{comment}{// this-\/>slope.define(x1,y1,x2,y2);}}
+\DoxyCodeLine{58     \}}
+\DoxyCodeLine{59 }
+\DoxyCodeLine{63     \textcolor{keywordtype}{float} \mbox{\hyperlink{class_segment_ae8fbe029184d1eaf484cb4f804fd57bd}{x}}(\textcolor{keywordtype}{float} y) \{}
+\DoxyCodeLine{64         \textcolor{keywordtype}{float} ratio = (st.\mbox{\hyperlink{class_point_a05dfe2dfbde813ad234b514f30e662f1}{x}} -\/ \mbox{\hyperlink{class_segment_a7d2cc7491c5c7c6459a58ad1fe358571}{en}}.\mbox{\hyperlink{class_point_a05dfe2dfbde813ad234b514f30e662f1}{x}}) / (st.\mbox{\hyperlink{class_point_a6101960c8d2d4e8ea1d32c9234bbeb8d}{y}} -\/ \mbox{\hyperlink{class_segment_a7d2cc7491c5c7c6459a58ad1fe358571}{en}}.\mbox{\hyperlink{class_point_a6101960c8d2d4e8ea1d32c9234bbeb8d}{y}});}
+\DoxyCodeLine{65         \textcolor{keywordflow}{return} st.\mbox{\hyperlink{class_point_a05dfe2dfbde813ad234b514f30e662f1}{x}} + ratio * (y -\/ st.\mbox{\hyperlink{class_point_a6101960c8d2d4e8ea1d32c9234bbeb8d}{y}});}
+\DoxyCodeLine{66     \}}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{68 }
+\DoxyCodeLine{72     point\_seg\_rel \mbox{\hyperlink{class_segment_a410600c8bbd3bdcd6b5ada19da53bc3a}{findPoint}}(\mbox{\hyperlink{class_point}{Point}} p) \{}
+\DoxyCodeLine{73 }
+\DoxyCodeLine{74         \textcolor{keywordflow}{if}(st.\mbox{\hyperlink{class_point_a6101960c8d2d4e8ea1d32c9234bbeb8d}{y}} == \mbox{\hyperlink{class_segment_a7d2cc7491c5c7c6459a58ad1fe358571}{en}}.\mbox{\hyperlink{class_point_a6101960c8d2d4e8ea1d32c9234bbeb8d}{y}}) \{}
+\DoxyCodeLine{75             \textcolor{keywordflow}{if}(p.x == st.\mbox{\hyperlink{class_point_a05dfe2dfbde813ad234b514f30e662f1}{x}}) \textcolor{keywordflow}{return} U;}
+\DoxyCodeLine{76             \textcolor{keywordflow}{if}(p.x == \mbox{\hyperlink{class_segment_a7d2cc7491c5c7c6459a58ad1fe358571}{en}}.\mbox{\hyperlink{class_point_a05dfe2dfbde813ad234b514f30e662f1}{x}}) \textcolor{keywordflow}{return} L;}
+\DoxyCodeLine{77             \textcolor{keywordflow}{return} C;}
+\DoxyCodeLine{78         \}}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{80         \textcolor{keywordtype}{float} px = \mbox{\hyperlink{class_segment_ae8fbe029184d1eaf484cb4f804fd57bd}{x}}(p.y);}
+\DoxyCodeLine{81 }
+\DoxyCodeLine{82         \textcolor{keywordflow}{if}(px == p.x) \{}
+\DoxyCodeLine{83             \textcolor{keywordflow}{if}(px == st.\mbox{\hyperlink{class_point_a05dfe2dfbde813ad234b514f30e662f1}{x}}) \textcolor{keywordflow}{return} U;}
+\DoxyCodeLine{84             \textcolor{keywordflow}{if}(px == \mbox{\hyperlink{class_segment_a7d2cc7491c5c7c6459a58ad1fe358571}{en}}.\mbox{\hyperlink{class_point_a05dfe2dfbde813ad234b514f30e662f1}{x}}) \textcolor{keywordflow}{return} L;}
+\DoxyCodeLine{85             \textcolor{keywordflow}{return} C;}
+\DoxyCodeLine{86         \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{87             \textcolor{keywordflow}{return} none;}
+\DoxyCodeLine{88         \}}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{90     \}}
+\DoxyCodeLine{91 }
+\DoxyCodeLine{95     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_segment_a9c228d46992a9e5a036285f5d4e54f16}{operator < }}(\mbox{\hyperlink{class_segment}{Segment}}\& s) \{}
+\DoxyCodeLine{96         \textcolor{keywordtype}{float} this\_x = this-\/>\mbox{\hyperlink{class_segment_ae8fbe029184d1eaf484cb4f804fd57bd}{x}}(sweeplineY);}
+\DoxyCodeLine{97         \textcolor{keywordtype}{float} next\_x = s.\mbox{\hyperlink{class_segment_ae8fbe029184d1eaf484cb4f804fd57bd}{x}}(\mbox{\hyperlink{class_segment_a88a58773e94526aaf8c3857a40427e6f}{sweeplineY}});}
+\DoxyCodeLine{98 }
+\DoxyCodeLine{99         \textcolor{comment}{// if(this\_x == next\_x) \{}}
+\DoxyCodeLine{100         \textcolor{comment}{//     return this-\/>slope < s.slope;}}
+\DoxyCodeLine{101         \textcolor{comment}{// \}}}
+\DoxyCodeLine{102 }
+\DoxyCodeLine{103         \textcolor{keywordflow}{return} this\_x < next\_x;}
+\DoxyCodeLine{104     \}}
+\DoxyCodeLine{105 }
+\DoxyCodeLine{109     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_segment_a57b31aca76756d54035f6f32b6c3eeaa}{operator > }}(\mbox{\hyperlink{class_segment}{Segment}}\& s) \{}
+\DoxyCodeLine{110         \textcolor{keywordtype}{float} this\_x = this-\/>\mbox{\hyperlink{class_segment_ae8fbe029184d1eaf484cb4f804fd57bd}{x}}(sweeplineY);}
+\DoxyCodeLine{111         \textcolor{keywordtype}{float} next\_x = s.\mbox{\hyperlink{class_segment_ae8fbe029184d1eaf484cb4f804fd57bd}{x}}(\mbox{\hyperlink{class_segment_a88a58773e94526aaf8c3857a40427e6f}{sweeplineY}});}
+\DoxyCodeLine{112 }
+\DoxyCodeLine{113         \textcolor{comment}{// if(this\_x == next\_x) \{}}
+\DoxyCodeLine{114         \textcolor{comment}{//     return this-\/>slope > s.slope;}}
+\DoxyCodeLine{115         \textcolor{comment}{// \}}}
+\DoxyCodeLine{116 }
+\DoxyCodeLine{117         \textcolor{keywordflow}{return} this\_x > next\_x;}
+\DoxyCodeLine{118     \}}
+\DoxyCodeLine{119 }
+\DoxyCodeLine{123     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_segment_a3e160e3a939fe847f51661417909a270}{operator == }}(\mbox{\hyperlink{class_segment}{Segment}}\& s) \{}
+\DoxyCodeLine{124         \textcolor{keywordflow}{return} this-\/>st == s.st \&\& this-\/>en == s.\mbox{\hyperlink{class_segment_a7d2cc7491c5c7c6459a58ad1fe358571}{en}}; }
+\DoxyCodeLine{125     \}}
+\DoxyCodeLine{126 }
+\DoxyCodeLine{131     \textcolor{keyword}{friend} ostream \&\mbox{\hyperlink{class_segment_ad331780594cb5bf40ca8a38f2c13ac85}{operator<<}}(ostream \&output, \textcolor{keyword}{const} \mbox{\hyperlink{class_segment}{Segment}} \&S) \{ }
+\DoxyCodeLine{132         output << \textcolor{stringliteral}{"{}endpoints: ("{}} << S.st.x << \textcolor{stringliteral}{"{}, "{}} << S.st.y << \textcolor{stringliteral}{"{}),"{}} << \textcolor{stringliteral}{"{}("{}} << S.en.x << \textcolor{stringliteral}{"{}, "{}} << S.en.y << \textcolor{stringliteral}{"{})"{}};}
+\DoxyCodeLine{133         \textcolor{keywordflow}{return} output;}
+\DoxyCodeLine{134     \}}
+\DoxyCodeLine{135 \};}
+\DoxyCodeLine{136 }
+\DoxyCodeLine{137 \textcolor{keywordtype}{float} \mbox{\hyperlink{class_segment_a88a58773e94526aaf8c3857a40427e6f}{Segment::sweeplineY}} = 0.0;}
+\DoxyCodeLine{138 }
+\DoxyCodeLine{139 \textcolor{keywordtype}{void} changeY(\textcolor{keywordtype}{float} Y) \{}
+\DoxyCodeLine{140     \mbox{\hyperlink{class_segment_a88a58773e94526aaf8c3857a40427e6f}{Segment::sweeplineY}} = Y;}
+\DoxyCodeLine{141 \}}
+
+\end{DoxyCode}

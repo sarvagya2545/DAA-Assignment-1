@@ -1,0 +1,30 @@
+\hypertarget{_a_v_l_tree_node_8h_source}{}\doxysection{AVLTree\+Node.\+h}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#include<stdio.h>}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#include<stdlib.h>}}
+\DoxyCodeLine{3 \textcolor{keyword}{using namespace }std;}
+\DoxyCodeLine{4 }
+\DoxyCodeLine{6 \textcolor{keyword}{template}<\textcolor{keyword}{class} T>}
+\DoxyCodeLine{7 \textcolor{keyword}{class }\mbox{\hyperlink{class_a_v_l_tree_node}{AVLTreeNode}} \{}
+\DoxyCodeLine{8     \textcolor{keyword}{public}:}
+\DoxyCodeLine{9     T \mbox{\hyperlink{class_a_v_l_tree_node_a45b795e381680f5db27cdfabaa5c0e72}{val}}; }
+\DoxyCodeLine{10     \textcolor{keywordtype}{int} height; }
+\DoxyCodeLine{11     \mbox{\hyperlink{class_a_v_l_tree_node}{AVLTreeNode<T>}}* \mbox{\hyperlink{class_a_v_l_tree_node_a2b206facc3fd01022721aba0aa32bc4b}{left}}; }
+\DoxyCodeLine{12     \mbox{\hyperlink{class_a_v_l_tree_node}{AVLTreeNode<T>}}* \mbox{\hyperlink{class_a_v_l_tree_node_ab3718acb73257828a30203a2d356428f}{right}}; }
+\DoxyCodeLine{13 }
+\DoxyCodeLine{15     \mbox{\hyperlink{class_a_v_l_tree_node}{AVLTreeNode<T>}}() \{}
+\DoxyCodeLine{16         this-\/>left = NULL;}
+\DoxyCodeLine{17         this-\/>right = NULL;}
+\DoxyCodeLine{18         this-\/>height = 1;}
+\DoxyCodeLine{19     \}}
+\DoxyCodeLine{20 }
+\DoxyCodeLine{23     \mbox{\hyperlink{class_a_v_l_tree_node}{AVLTreeNode<T>}}(T \_val): \mbox{\hyperlink{class_a_v_l_tree_node_a45b795e381680f5db27cdfabaa5c0e72}{val}}(\_val) \{}
+\DoxyCodeLine{24         \textcolor{comment}{// this-\/>val = \_val;}}
+\DoxyCodeLine{25         this-\/>left = NULL;}
+\DoxyCodeLine{26         this-\/>right = NULL;}
+\DoxyCodeLine{27         this-\/>height = 1;}
+\DoxyCodeLine{28     \}}
+\DoxyCodeLine{29 \};}
+
+\end{DoxyCode}
