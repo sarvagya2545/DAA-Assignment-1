@@ -19,12 +19,9 @@ const float FLT_MAX = std::numeric_limits<float>::max();
 /// @brief Function to print Intersections
 /// @param intersections A vector containing a pair of a point and a segment list containing segments passing through it
 void printIntersections(vector<pair<Point, vector<vector<Segment>>>> intersections) {
-    cout << "\nPrinting intersections:\n";
-    cout << "\n*** *** *** *** *** *** *** *** *** *** ***\n";
     for(int i = 0; i < intersections.size(); i++) {
-        cout << intersections[i].first << "\n";
+        cout << "intersection_point\t" << intersections[i].first << "\n\n";
     }
-    cout << "\n*** *** *** *** *** *** *** *** *** *** ***\n";
 }
 
 /// @brief Function to initialise event queue with the segment endpoints
