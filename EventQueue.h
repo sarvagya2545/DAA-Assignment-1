@@ -42,6 +42,8 @@ class EventQueue {
         point_seg_rel type = s.findPoint(p);
         Event e(p.x, p.y, s, type);
 
+        cout << "Event\t " << e << endl;
+
         AVLTreeNode<Event>* res = this->event_q.search(e);
         if(res == NULL) {
             // if no event matched, insert a new event

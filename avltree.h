@@ -207,14 +207,14 @@ class AVLTree {
             
             int bal = height(node->left) - height(node->right);
             if (bal > 1) {
-                if (height(node->left) >= height(node->right)) {
+                if (height(node->left->left) - height(node->left->right) >= 0) {
                     return rightRotation(node);
                 } else {
                     node->left = leftRotation(node->left);
                     return rightRotation(node);
                 }
             } else if (bal < -1) {
-                if (height(node->right) >= height(node->left)) {
+                if (height(node->right->left) - height(node->right->right) <= 0) {
                     return leftRotation(node);
                 } else {
                     node->right = rightRotation(node->right);

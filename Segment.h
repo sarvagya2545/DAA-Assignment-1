@@ -93,8 +93,8 @@ class Segment {
     /// @param s Segment s 
     /// @returns bool 
     bool operator < (Segment& s) {
-        float this_x = this->x(sweeplineY);
-        float next_x = s.x(sweeplineY);
+        float this_x = this->st.y != this->en.y ? this->x(sweeplineY) : (this->st.x);
+        float next_x = s.st.y != s.en.y ? s.x(sweeplineY) : s.st.x;
 
         // if(this_x == next_x) {
         //     return this->slope < s.slope;
@@ -107,8 +107,8 @@ class Segment {
     /// @param s Segment s 
     /// @returns bool 
     bool operator > (Segment& s) {
-        float this_x = this->x(sweeplineY);
-        float next_x = s.x(sweeplineY);
+        float this_x = this->st.y != this->en.y ? this->x(sweeplineY) : this->st.x;
+        float next_x = s.st.y != s.en.y ? s.x(sweeplineY) : s.st.x;
 
         // if(this_x == next_x) {
         //     return this->slope > s.slope;

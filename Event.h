@@ -8,7 +8,7 @@ class Event {
     
     float x; //!< x coordinate
     float y; //!< y coordinate
-    vector<vector<Segment>> segments = vector<vector<Segment>> (3, vector<Segment>(0)); //!< list of segments passing through the point 
+    vector<vector<Segment>> segments = vector<vector<Segment>> (4, vector<Segment>(0)); //!< list of segments passing through the point 
 
     /// @brief Constructor function for the event
     /// @param _x floating point value for the x coordinate
@@ -33,6 +33,11 @@ class Event {
     /// @param s Segment which passes through the coordinate
     /// @param t enum value for relationship between point and segment
     void insertSegment(Segment s, point_seg_rel t) {
+        for(int i = 0; i < segments[t].size(); i++) {
+            if(segments[t][i] == s) {
+                return;
+            }
+        }
         segments[t].push_back(s);
     }
 

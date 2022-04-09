@@ -1,6 +1,6 @@
 #include <vector>
 #include <iostream>
-#include <limits.h>
+#include <limits>
 #include "utils.h"
 #include "Segment.h"
 #include "Event.h"
@@ -11,6 +11,10 @@
 LineStatus status_queue;
 EventQueue event_queue;
 vector<pair<Point, vector<vector<Segment>>>> intersections;
+
+// limits
+const float FLT_MIN = std::numeric_limits<float>::lowest();
+const float FLT_MAX = std::numeric_limits<float>::max();
 
 /// @brief Function to print Intersections
 /// @param intersections A vector containing a pair of a point and a segment list containing segments passing through it
@@ -97,9 +101,7 @@ void findNewEvent(Segment s_l, Segment s_r, Point p) {
 /// @returns pair<bool, Segment> a pair of a boolean and a Segment: to represent whether a leftmost segment exists or not & the Segment itself
 pair<bool,Segment> findLeftMostSeg(vector<Segment> lineSet) {
     // left most segment is the segment with min x coordinate for a particular y
-    // float min_x = lineSet[0].x(Segment::sweeplineY);
     float min_x = FLT_MAX;
-    // Segment mn = lineSet[0];
     int mn = -1;
 
     for(int i = 0; i < lineSet.size(); i++) {
@@ -121,9 +123,7 @@ pair<bool,Segment> findLeftMostSeg(vector<Segment> lineSet) {
 /// @returns pair<bool, Segment> a pair of a boolean and a Segment: to represent whether a rightmost segment exists or not & the Segment itself
 pair<bool,Segment> findRightMostSeg(vector<Segment> lineSet) {
     // right most segment is the segment with max x coordinate for a particular y
-    // float max_x = lineSet[0].x(Segment::sweeplineY);
     float max_x = FLT_MIN;
-    // Segment mx = lineSet[0];
     int mx = -1;
 
     for(int i = 0; i < lineSet.size(); i++) {
@@ -149,15 +149,15 @@ vector<Segment> unionOf(vector<Segment> lineSet1, vector<Segment> lineSet2) {
     vector<Segment> unionSet(lineSet1);
 
     for(int i = 0; i < lineSet2.size(); i++) {
-        bool unique = true;
+        bool found = true;
         for(int j = 0; j < lineSet1.size(); j++) {
             if(lineSet1[j] == lineSet2[i]) {
-                unique = false;
+                found = false;
                 break;
             }
         }
 
-        if(unique) {
+        if(found) {
             unionSet.push_back(lineSet2[i]);
         }
     }
@@ -197,21 +197,22 @@ void handleEventPoint(Event e) {
         status_queue.insert(UCset[i]);
     }
 
-    // cout << "Printing Status Queue...\n";
-    // status_queue.print();
+    cout << "Printing Status Queue...\n";
+    status_queue.print();
 
-    // cout << "Printing intersections...\n" << intersections.size();
+    cout << "Printing intersections...\n" << intersections.size();
 
     Point p(e.x, e.y);
 
     if(UCset.size() == 0) {
+        cout << "UC set size is 0";
         pair<bool, vector<Segment>> neighbours = status_queue.neighbours(p);
 
         if(neighbours.first) {
             vector<Segment> neighbourList = neighbours.second;
-            // cout << "\n** ** ** ** ** **\n";
-            // cout << neighbourList[0] << "\t" << neighbourList[1];
-            // cout << "\n** ** ** ** ** **\n";
+            cout << "\n** ** ** ** ** **\n";
+            cout << neighbourList[0] << "\t" << neighbourList[1];
+            cout << "\n** ** ** ** ** **\n";
 
             findNewEvent(neighbourList[0], neighbourList[1], p);
         }
@@ -246,8 +247,11 @@ void handleEventPoint(Event e) {
 void findIntersections(EventQueue event_q) {
     cout << "Inside findIntersections...\n";
     while(!event_q.empty()) {
-        cout << "Event handle...\n";
+        cout << "***Printing Event Queue***" << endl;
+        event_q.print();
+        cout << "***Printing Event Queue***" << endl;
         Event nextEvent = event_q.next();
+        cout << "Event handle...\t" << nextEvent << "\n";
         handleEventPoint(nextEvent);
     }
 }
@@ -265,11 +269,10 @@ int main() {
     }
 
     event_queue = initEventQueue(segmentList);
-    // event_queue.print();
-    // cout << "Find intersections...\n";
+    cout << "\n***Printing Event Queue...\n";
+    event_queue.print();
+    cout << "***Finished Printing Event Queue...\n";
     findIntersections(event_queue);
-
     printIntersections(intersections);
-
     return 0;
 }
