@@ -91,6 +91,9 @@ void findNewEvent(Segment s_l, Segment s_r, Point p) {
         Point intersection_point(coor.first, coor.second);
         cout << "\nintersection_point\t" << intersection_point;
         cout << "\nSegments\t" << s_l << "\t" << s_r << "\n";
+        cout << "\n***Print Event Queue before Intersection***\n";
+        event_queue.print();
+        cout << "\n***Finished Print Event Queue before Intersection***\n";
         event_queue.insert(intersection_point, s_l);
         event_queue.insert(intersection_point, s_r);
     }
@@ -244,7 +247,7 @@ void handleEventPoint(Event e) {
 
 /// @brief Function to find intersections
 /// @param event_q The event queue containing all the endpoints of all the segments
-void findIntersections(EventQueue event_q) {
+void findIntersections(EventQueue &event_q) {
     cout << "Inside findIntersections...\n";
     while(!event_q.empty()) {
         cout << "***Printing Event Queue***" << endl;

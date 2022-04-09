@@ -77,6 +77,12 @@ class Segment {
             return C;
         }
 
+        if(st.x == en.x) {
+            if(p.y == st.y) return U;
+            if(p.y == en.y) return L;
+            return C;
+        }
+
         float px = x(p.y);
 
         if(px == p.x) {

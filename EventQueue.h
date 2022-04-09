@@ -44,14 +44,26 @@ class EventQueue {
 
         cout << "Event\t " << e << endl;
 
+        cout << "\nPrinting inside before inserting event;\n";
+        event_q.inorder();
+        cout << "\nFinished Printing inside before inserting event;\n";
+
         AVLTreeNode<Event>* res = this->event_q.search(e);
         if(res == NULL) {
+            cout << "Inserting new event";
             // if no event matched, insert a new event
-            event_q.insert(e);
+            this->event_q.insert(e);
         } else {
+            cout << "Result" << res->val;
             // insert the segments to the current event
             res->val.insertSegment(s, type);
+
+            cout << "Result After\t" << res->val;
         }
+
+        cout << "\nPrinting inside after inserting event;\n";
+        event_q.inorder();
+        cout << "\nFinished Printing inside after inserting event;\n";
     }
 
     /// @brief Function to print the event queue in inorder fashion
