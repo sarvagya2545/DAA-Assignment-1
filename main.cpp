@@ -89,11 +89,11 @@ void findNewEvent(Segment s_l, Segment s_r, Point p) {
     pair<float, float> coor = ans.second;
     if(hasIntersection && (coor.second < p.y || (coor.second == p.y && coor.first > p.x))) {
         Point intersection_point(coor.first, coor.second);
-        cout << "\nintersection_point\t" << intersection_point;
-        cout << "\nSegments\t" << s_l << "\t" << s_r << "\n";
-        cout << "\n***Print Event Queue before Intersection***\n";
-        event_queue.print();
-        cout << "\n***Finished Print Event Queue before Intersection***\n";
+        // cout << "\nintersection_point\t" << intersection_point;
+        // cout << "\nSegments\t" << s_l << "\t" << s_r << "\n";
+        // cout << "\n***Print Event Queue before Intersection***\n";
+        // event_queue.print();
+        // cout << "\n***Finished Print Event Queue before Intersection***\n";
         event_queue.insert(intersection_point, s_l);
         event_queue.insert(intersection_point, s_r);
     }
@@ -200,22 +200,22 @@ void handleEventPoint(Event e) {
         status_queue.insert(UCset[i]);
     }
 
-    cout << "Printing Status Queue...\n";
-    status_queue.print();
+    // cout << "Printing Status Queue...\n";
+    // status_queue.print();
 
-    cout << "Printing intersections...\n" << intersections.size();
+    // cout << "Printing intersections...\n" << intersections.size();
 
     Point p(e.x, e.y);
 
     if(UCset.size() == 0) {
-        cout << "UC set size is 0";
+        // cout << "UC set size is 0";
         pair<bool, vector<Segment>> neighbours = status_queue.neighbours(p);
 
         if(neighbours.first) {
             vector<Segment> neighbourList = neighbours.second;
-            cout << "\n** ** ** ** ** **\n";
-            cout << neighbourList[0] << "\t" << neighbourList[1];
-            cout << "\n** ** ** ** ** **\n";
+            // cout << "\n** ** ** ** ** **\n";
+            // cout << neighbourList[0] << "\t" << neighbourList[1];
+            // cout << "\n** ** ** ** ** **\n";
 
             findNewEvent(neighbourList[0], neighbourList[1], p);
         }
@@ -248,13 +248,13 @@ void handleEventPoint(Event e) {
 /// @brief Function to find intersections
 /// @param event_q The event queue containing all the endpoints of all the segments
 void findIntersections(EventQueue &event_q) {
-    cout << "Inside findIntersections...\n";
+    // cout << "Inside findIntersections...\n";
     while(!event_q.empty()) {
-        cout << "***Printing Event Queue***" << endl;
-        event_q.print();
-        cout << "***Printing Event Queue***" << endl;
+        // cout << "***Printing Event Queue***" << endl;
+        // event_q.print();
+        // cout << "***Printing Event Queue***" << endl;
         Event nextEvent = event_q.next();
-        cout << "Event handle...\t" << nextEvent << "\n";
+        // cout << "Event handle...\t" << nextEvent << "\n";
         handleEventPoint(nextEvent);
     }
 }
@@ -272,9 +272,9 @@ int main() {
     }
 
     event_queue = initEventQueue(segmentList);
-    cout << "\n***Printing Event Queue...\n";
-    event_queue.print();
-    cout << "***Finished Printing Event Queue...\n";
+    // cout << "\n***Printing Event Queue...\n";
+    // event_queue.print();
+    // cout << "***Finished Printing Event Queue...\n";
     findIntersections(event_queue);
     printIntersections(intersections);
     return 0;
